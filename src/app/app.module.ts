@@ -15,6 +15,8 @@ import { fakeBackendProvider } from './helpers/fake-backend';
 import { HomeComponent } from './features/home/home.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { LogisticComponent } from './features/logistic/logistic.component';
+import { LeasingComponent } from './features/leasing/leasing.component';
+import { ContactComponent } from './features/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { LogisticComponent } from './features/logistic/logistic.component';
     FooterComponent,
     HomeComponent,
     AlertComponent,
-    LogisticComponent
+    LogisticComponent,
+    LeasingComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
