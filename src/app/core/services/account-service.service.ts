@@ -14,12 +14,13 @@ export class AccountService {
 
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
+    data?: User;
 
     constructor(
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user') as string));
         this.user = this.userSubject.asObservable();
     }
 
@@ -27,7 +28,7 @@ export class AccountService {
         return this.userSubject.value;
     }
 
-    login(username, password) {
+    login(username: string, password:string) {
         return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -40,7 +41,7 @@ export class AccountService {
     logout() {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
-        this.userSubject.next(null);
+        this.userSubject.next(null as any);
         this.router.navigate(['/account/login']);
     }
 
@@ -56,7 +57,7 @@ export class AccountService {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
-    update(id, params) {
+    update(id:string, params: any) {
         return this.http.put(`${environment.apiUrl}/users/${id}`, params)
             .pipe(map(x => {
                 // update stored user if the logged in user updated their own record
@@ -82,4 +83,9 @@ export class AccountService {
                 return x;
             }));
     }
-}
+
+    isLogged() {
+        const isAuth = this.data && this.data.token ? true : false;
+        return isAuth;
+    }
+} 

@@ -7,7 +7,11 @@ import { Alert, AlertType } from 'src/app/model/alert';
 
 
 
-@Component({ selector: 'alert', templateUrl: 'alert.component.html' })
+@Component({
+    selector: 'alert',
+    templateUrl: 'alert.component.html',
+    styleUrls: ['alert.component.css']
+})
 export class AlertComponent implements OnInit, OnDestroy {
     @Input() id = 'default-alert';
     @Input() fade = true;
@@ -17,9 +21,9 @@ export class AlertComponent implements OnInit, OnDestroy {
     routeSubscription?: Subscription;
 
     constructor(
-      private router: Router, 
-      private alertService: AlertService
-      ) { }
+        private router: Router,
+        private alertService: AlertService
+    ) { }
 
     ngOnInit() {
         // subscribe to new alert notifications
@@ -42,7 +46,7 @@ export class AlertComponent implements OnInit, OnDestroy {
                 if (alert.autoClose) {
                     setTimeout(() => this.removeAlert(alert), 3000);
                 }
-           });
+            });
 
         // clear alerts on location change
         this.routeSubscription = this.router.events.subscribe(event => {
@@ -80,7 +84,7 @@ export class AlertComponent implements OnInit, OnDestroy {
         if (!alert) return;
 
         const classes = ['alert', 'alert-dismissable', 'mt-4', 'container'];
-                
+
         const alertTypeClass = {
             [AlertType.Success]: 'alert alert-success',
             [AlertType.Error]: 'alert alert-danger',

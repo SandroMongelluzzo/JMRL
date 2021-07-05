@@ -5,26 +5,41 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LoginComponent } from './public/login/login.component';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorInterceptor } from './core/interceptor/error.interceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
+import { fakeBackendProvider } from './helpers/fake-backend';
+import { HomeComponent } from './features/home/home.component';
+import { AlertComponent } from './shared/alert/alert.component';
+import { LogisticComponent } from './features/logistic/logistic.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    AlertComponent,
+    LogisticComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    
+    //fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
