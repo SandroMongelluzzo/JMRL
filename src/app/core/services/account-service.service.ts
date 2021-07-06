@@ -28,7 +28,7 @@ export class AccountService {
         return this.userSubject.value;
     }
 
-    login(username: string, password:string) {
+    login(username: string, password: string) {
         return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -57,7 +57,7 @@ export class AccountService {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
-    update(id:string, params: any) {
+    update(id: string, params: any) {
         return this.http.put(`${environment.apiUrl}/users/${id}`, params)
             .pipe(map(x => {
                 // update stored user if the logged in user updated their own record
@@ -88,4 +88,4 @@ export class AccountService {
         const isAuth = this.data && this.data.token ? true : false;
         return isAuth;
     }
-} 
+}

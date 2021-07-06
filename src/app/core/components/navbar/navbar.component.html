@@ -23,6 +23,9 @@
         <a class="nav-link" [routerLink]="'/users'" (click)="isMenuCollapsed = true" *ngIf="user.admin === true">Users</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/vehicles'" (click)="isMenuCollapsed = true" *ngIf="user.admin === true">Vehicles</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link logout" (click)="logout()">Logout</a>
       </li>
     </ul>

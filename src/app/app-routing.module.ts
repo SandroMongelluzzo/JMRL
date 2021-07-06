@@ -20,6 +20,9 @@ const routes: Routes = [
     path: 'users', loadChildren: () => import('src/app/features/admin/manage-users/users.module').then(m => m.UsersModule), canActivate: [AuthGuard, AdminGuard] 
   },
   {
+    path: 'vehicles', loadChildren: () => import('src/app/features/admin/manage-vehicles/vehicles.module').then(m => m.VehiclesModule), canActivate: [AuthGuard, AdminGuard] 
+  },
+  {
     path: 'account', loadChildren: () => import('src/app/public/account-module/account.module').then(m => m.AccountModule), //canActivate: [AuthGuard] 
   },
 

@@ -1,0 +1,34 @@
+<h1>Vehicles</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Vehicle</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 22.5%">Type</th>
+            <th style="width: 22.5%">Model</th>
+            <th style="width: 22.5%">Plate</th>
+            <th style="width: 22.5%">Available</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vehicle of vehicles">
+            <td>{{vehicle.type}}</td>
+            <td>{{vehicle.model}}</td>
+            <td>{{vehicle.plate}}</td>
+            <td>{{vehicle.available}}</td>
+
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{vehicle.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deleteVehicle(vehicle.id)" class="btn btn-sm btn-danger btn-delete-vehicle" [disabled]="vehicle.isDeleting">
+                    <span *ngIf="vehicle.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!vehicle.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!vehicles">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

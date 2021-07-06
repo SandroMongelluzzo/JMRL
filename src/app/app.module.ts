@@ -17,6 +17,9 @@ import { AlertComponent } from './shared/alert/alert.component';
 import { LogisticComponent } from './features/logistic/logistic.component';
 import { LeasingComponent } from './features/leasing/leasing.component';
 import { ContactComponent } from './features/contact/contact.component';
+import { VehiclelistComponent } from './features/admin/manage-vehicles/vehiclelist/vehiclelist.component';
+import { VehiclelayoutComponent } from './features/admin/manage-vehicles/vehiclelayout/vehiclelayout.component';
+import { VehicleeditComponent } from './features/admin/manage-vehicles/vehicleedit/vehicleedit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,7 @@ import { ContactComponent } from './features/contact/contact.component';
     AlertComponent,
     LogisticComponent,
     LeasingComponent,
-    ContactComponent
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
