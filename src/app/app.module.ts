@@ -7,7 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { FooterComponent } from './core/components/footer/footer.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorInterceptor } from './core/interceptor/error.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
@@ -20,6 +20,10 @@ import { ContactComponent } from './features/contact/contact.component';
 import { VehiclelistComponent } from './features/admin/manage-vehicles/vehiclelist/vehiclelist.component';
 import { VehiclelayoutComponent } from './features/admin/manage-vehicles/vehiclelayout/vehiclelayout.component';
 import { VehicleeditComponent } from './features/admin/manage-vehicles/vehicleedit/vehicleedit.component';
+import { NotfoundComponent } from './core/components/notfound/notfound.component';
+import { DecimalPipe } from '@angular/common';
+import { AdminNavbarComponent } from './core/components/admin-navbar/admin-navbar.component';
+import { SandroneComponent } from './shared/sandrone/sandrone.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,9 @@ import { VehicleeditComponent } from './features/admin/manage-vehicles/vehicleed
     LogisticComponent,
     LeasingComponent,
     ContactComponent,
+    NotfoundComponent,
+    AdminNavbarComponent,
+    SandroneComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,12 +45,14 @@ import { VehicleeditComponent } from './features/admin/manage-vehicles/vehicleed
     NgbModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgbModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
+DecimalPipe,
     
     //fakeBackendProvider
   ],

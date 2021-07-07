@@ -1,0 +1,6 @@
+.app-container{
+    background-color: whitesmoke;
+}
+footer{
+    z-index: 1000;
+}

@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { VehicleeditComponent } from './vehicleedit/vehicleedit.component';
 import { VehiclelayoutComponent } from './vehiclelayout/vehiclelayout.component';
 import { VehiclelistComponent } from './vehiclelist/vehiclelist.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VehiclesRoutingModule } from './vehicles-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -18,6 +19,9 @@ import { VehiclesRoutingModule } from './vehicles-routing.module';
     CommonModule,
     ReactiveFormsModule,
     VehiclesRoutingModule,
+    FormsModule,
+    NgbModule
+  
   ]
 })
 export class VehiclesModule { }

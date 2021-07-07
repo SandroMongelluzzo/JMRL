@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
+import { VehicleService } from 'src/app/core/services/vehicle.service';
+import { Vehicle } from 'src/app/model/vehicle';
 
 @Component({
   selector: 'app-leasing',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeasingComponent implements OnInit {
 
-  constructor() { }
+  vehiclesMain?: Vehicle[];
+
+  constructor(private vehicleService: VehicleService) { }
 
   ngOnInit(): void {
+    this.vehicleService.getAll()
+      .pipe(first())
+      .subscribe(vehicles2 => this.vehiclesMain = vehicles2);
   }
 
 }

@@ -1,1 +1,10 @@
-<p>leasing works!</p>
+<tr *ngFor="let vehicle of vehiclesMain">
+    <td>
+        <div class="vehicle-{{vehicle.available}}" >
+            <a href="">
+                <img [src]="vehicle.imageUrl">
+                <p>{{vehicle.model}}</p>
+            </a>
+        </div>
+    </td>
+</tr>

@@ -6,5 +6,5 @@ export interface Vehicle{
     plate: string,
     matriculation: string,
     available: boolean,
-    image: Blob
+    imageUrl: string
 }

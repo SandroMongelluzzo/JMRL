@@ -1,8 +1,10 @@
 <!-- nav -->
 <app-navbar></app-navbar>
-
+<app-admin-navbar></app-admin-navbar>
 <!-- main app container -->
 <div class="app-container" [ngClass]="{ 'bg-light': user }">
   <alert></alert>
   <router-outlet></router-outlet>
 </div>
+
+<app-footer class="footer"></app-footer>

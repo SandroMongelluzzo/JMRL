@@ -1,34 +1,56 @@
-<h1>Vehicles</h1>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Vehicle</a>
-<table class="table table-striped">
+<form>
+  <!-- <div class="form-group form-inline">
+    Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm" />
+    <span class="ml-3" *ngIf="loading$ | async">Loading...</span>
+  </div> -->
+
+  <h1>Vehicles</h1>
+  <a routerLink="add" class="btn btn-sm btn-success mb-2">Add Vehicle</a>
+  <table class="table table-striped">
+
     <thead>
-        <tr>
-            <th style="width: 22.5%">Type</th>
-            <th style="width: 22.5%">Model</th>
-            <th style="width: 22.5%">Plate</th>
-            <th style="width: 22.5%">Available</th>
-            <th style="width: 10%"></th>
-        </tr>
+      <tr>
+        <th style="width: 5%">ID</th>
+        <th style="width: 20%">Type</th>
+        <th style="width: 20%">Model</th>
+        <th style="width: 20%">Plate</th>
+        <th style="width: 20%">Available</th>
+        <th style="width: 5%"></th>
+      </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let vehicle of vehicles">
-            <td>{{vehicle.type}}</td>
-            <td>{{vehicle.model}}</td>
-            <td>{{vehicle.plate}}</td>
-            <td>{{vehicle.available}}</td>
 
-            <td style="white-space: nowrap">
-                <a routerLink="edit/{{vehicle.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-                <button (click)="deleteVehicle(vehicle.id)" class="btn btn-sm btn-danger btn-delete-vehicle" [disabled]="vehicle.isDeleting">
-                    <span *ngIf="vehicle.isDeleting" class="spinner-border spinner-border-sm"></span>
-                    <span *ngIf="!vehicle.isDeleting">Delete</span>
-                </button>
-            </td>
-        </tr>
-        <tr *ngIf="!vehicles">
-            <td colspan="4" class="text-center">
-                <span class="spinner-border spinner-border-lg align-center"></span>
-            </td>
-        </tr>
+      <tr *ngFor="let vehicle of vehiclesMain">
+        <td>{{ vehicle.id }}</td>
+        <td>{{vehicle.type}}</td>
+        <td>{{vehicle.model}}</td>
+        <td>{{vehicle.plate}}</td>
+        <td>{{vehicle.available}}</td>
+        <td>
+          
+          
+
+        <td style="white-space: nowrap">
+          <a routerLink="edit/{{vehicle.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+          <button (click)="deleteVehicle(vehicle.id)" class="btn btn-sm btn-danger btn-delete-vehicle"
+            [disabled]="vehicle.isDeleting">
+            <span *ngIf="vehicle.isDeleting" class="spinner-border spinner-border-sm"></span>
+            <span *ngIf="!vehicle.isDeleting">Delete</span>
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="!vehiclesMain">
+        <td colspan="4" class="text-center">
+          <span class="spinner-border spinner-border-lg align-center"></span>
+        </td>
+      </tr>
     </tbody>
-</table>
+  </table>
+</form>
+<form>
+
+  <!-- <ngb-highlight [result]="vehicle.model" [term]="searchTerm"></ngb-highlight>
+        </td>
+        <td>
+          <ngb-highlight [result]="vehicle.model | number" [term]="searchTerm"></ngb-highlight>
+        </td> -->
