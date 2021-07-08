@@ -20,8 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     VehiclesRoutingModule,
     FormsModule,
-    NgbModule
-  
+    NgbModule  
   ]
 })
 export class VehiclesModule { }

@@ -4,6 +4,7 @@ export interface User {
     password: string;
     firstName: string;
     lastName: string;
+    emailAddress: string;
     token: string;
     admin:boolean;
 }

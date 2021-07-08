@@ -11,19 +11,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorInterceptor } from './core/interceptor/error.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
-import { fakeBackendProvider } from './helpers/fake-backend';
 import { HomeComponent } from './features/home/home.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { LogisticComponent } from './features/logistic/logistic.component';
 import { LeasingComponent } from './features/leasing/leasing.component';
 import { ContactComponent } from './features/contact/contact.component';
-import { VehiclelistComponent } from './features/admin/manage-vehicles/vehiclelist/vehiclelist.component';
-import { VehiclelayoutComponent } from './features/admin/manage-vehicles/vehiclelayout/vehiclelayout.component';
-import { VehicleeditComponent } from './features/admin/manage-vehicles/vehicleedit/vehicleedit.component';
 import { NotfoundComponent } from './core/components/notfound/notfound.component';
 import { DecimalPipe } from '@angular/common';
 import { AdminNavbarComponent } from './core/components/admin-navbar/admin-navbar.component';
 import { SandroneComponent } from './shared/sandrone/sandrone.component';
+import { ContactService } from './core/services/contact.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -48,13 +48,15 @@ import { SandroneComponent } from './shared/sandrone/sandrone.component';
     HttpClientModule,
     FormsModule,
     NgbModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-DecimalPipe,
-    
-    //fakeBackendProvider
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    DecimalPipe,
+    ContactService
+
   ],
   bootstrap: [AppComponent]
 })

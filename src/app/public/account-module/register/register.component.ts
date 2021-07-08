@@ -5,8 +5,6 @@ import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account-service.service';
 import { AlertService } from 'src/app/core/services/alert-service.service';
 
-
-
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
     form?: FormGroup;
@@ -20,7 +18,6 @@ export class RegisterComponent implements OnInit {
         private accountService: AccountService,
         private alertService: AlertService
     ) {
-        // redirect to home if already logged in
         if (this.accountService.userValue) {
             this.router.navigate(['/']);
         }
@@ -28,6 +25,7 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
+            emailAddress: ['', Validators.required],
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
@@ -35,16 +33,13 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    // convenience getter for easy access to form fields
     get f() { return this.form?.controls; }
 
     onSubmit() {
         this.submitted = true;
 
-        // reset alerts on submit
         this.alertService.clear();
 
-        // stop here if form is invalid
         if (this.form?.invalid) {
             return;
         }

@@ -15,6 +15,14 @@
                 <a class="nav-link" [routerLink]="'/vehicles'" (click)="isMenuCollapsed = true"
                     *ngIf="user?.admin === true">Vehicles</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/emailsFC'" (click)="isMenuCollapsed = true"
+                    *ngIf="user?.admin === true">emailsFC</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/tickets'" (click)="isMenuCollapsed = true"
+                    *ngIf="user?.admin === true">Tickets</a>
+            </li>
         </ul>
     </div>
 </nav>
