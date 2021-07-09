@@ -6,11 +6,13 @@ import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account-service.service';
 import { AlertService } from 'src/app/core/services/alert-service.service';
 
+
 @Component(
-  { templateUrl: 'login.component.html' }
-  )
+    { templateUrl: 'login.component.html' }
+)
 
 export class LoginComponent implements OnInit {
+
     loginForm?: FormGroup;
     loading = false;
     submitted = false;
@@ -65,4 +67,6 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 });
     }
+
+
 }

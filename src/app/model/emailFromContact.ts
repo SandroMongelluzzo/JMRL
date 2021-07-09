@@ -3,5 +3,6 @@ id: string,
 emailAddress: string,
 name: string,
 comment: string,
-attachmentUrl: string
+attachmentURL: string,
+answer:string
 }

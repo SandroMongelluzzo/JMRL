@@ -3,10 +3,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { LayoutComponent } from '../layout/layout.component';
 import { AccountRoutingModule } from './accout-routing.module';
-
-
+import { AccountLayoutComponent } from './layout/accountlayout.component';
 
 @NgModule({
     imports: [
@@ -15,9 +13,9 @@ import { AccountRoutingModule } from './accout-routing.module';
         AccountRoutingModule
     ],
     declarations: [
-        LayoutComponent,
+        AccountLayoutComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
     ]
 })
 export class AccountModule { }

@@ -17,7 +17,7 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
   dataSource = null as any
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort?: MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private emailsFCService: EmailFromContactService) { 
     
@@ -32,8 +32,8 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
     .subscribe(emails => {
       this.emailsFC = emails
       this.dataSource = new MatTableDataSource(this.emailsFC);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      setTimeout(() => this.dataSource.paginator = this.paginator);
+      setTimeout(() => this.dataSource.sort = this.sort);
     });  
   }
 
@@ -55,6 +55,12 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
     this.emailsFCService.delete(id)
       .pipe(first())
       .subscribe(() => this.emailsFC = this.emailsFC.filter((x: any) => x.id !== id));
+      this.deleteRowDataTable();
+  }
+  private deleteRowDataTable(){
+    this.dataSource.paginator = this.paginator;
+    window.location.reload();
+    
   }
 
   //
@@ -70,7 +76,6 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
       this.selection.clear();
       return;
     }
-
     this.selection.select(...this.dataSource.data);
   }
 

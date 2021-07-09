@@ -31,7 +31,7 @@ const routes: Routes = [
     path: 'account', loadChildren: () => import('src/app/public/account-module/account.module').then(m => m.AccountModule), //canActivate: [AuthGuard] 
   },
 
-  // otherwise redirect to home
+  // otherwise redirect to 404
   { path: '**', redirectTo: '404' },
 ];
 

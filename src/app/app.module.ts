@@ -17,7 +17,7 @@ import { LogisticComponent } from './features/logistic/logistic.component';
 import { LeasingComponent } from './features/leasing/leasing.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { NotfoundComponent } from './core/components/notfound/notfound.component';
-import { DecimalPipe } from '@angular/common';
+import {  DecimalPipe } from '@angular/common';
 import { AdminNavbarComponent } from './core/components/admin-navbar/admin-navbar.component';
 import { SandroneComponent } from './shared/sandrone/sandrone.component';
 import { ContactService } from './core/services/contact.service';
@@ -31,11 +31,11 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    AlertComponent,
     LogisticComponent,
     LeasingComponent,
     ContactComponent,
     NotfoundComponent,
+    AlertComponent,
     AdminNavbarComponent,
     SandroneComponent,
   ],
@@ -48,7 +48,8 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

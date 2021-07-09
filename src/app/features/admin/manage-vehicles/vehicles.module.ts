@@ -18,9 +18,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    VehiclesRoutingModule,
     FormsModule,
-    NgbModule  
+    NgbModule,
+    VehiclesRoutingModule,
   ]
 })
 export class VehiclesModule { }
