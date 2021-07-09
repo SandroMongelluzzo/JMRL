@@ -20,10 +20,8 @@ import { NotfoundComponent } from './core/components/notfound/notfound.component
 import {  DecimalPipe } from '@angular/common';
 import { AdminNavbarComponent } from './core/components/admin-navbar/admin-navbar.component';
 import { SandroneComponent } from './shared/sandrone/sandrone.component';
-import { ContactService } from './core/services/contact.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-
 
 @NgModule({
   declarations: [
@@ -38,6 +36,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     AlertComponent,
     AdminNavbarComponent,
     SandroneComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -56,8 +55,6 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     DecimalPipe,
-    ContactService
-
   ],
   bootstrap: [AppComponent]
 })

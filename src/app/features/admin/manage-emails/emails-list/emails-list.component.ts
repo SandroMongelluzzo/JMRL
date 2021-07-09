@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs/operators';
 import { EmailFromContactService } from 'src/app/core/services/email-from-contact.service';
-import {SelectionModel} from '@angular/cdk/collections';
+import { SelectionModel } from '@angular/cdk/collections';
 import { EmailFromContact } from 'src/app/model/emailFromContact';
 
 @Component({
@@ -19,8 +19,8 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private emailsFCService: EmailFromContactService) { 
-    
+  constructor(private emailsFCService: EmailFromContactService) {
+
   }
   displayedColumns: string[] = ['select', 'id', 'emailAddress', 'name2', 'comment', 'open'];
   selection = new SelectionModel<EmailFromContact>(true, []);
@@ -28,13 +28,13 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.emailsFCService.getAll()
-    .pipe(first())
-    .subscribe(emails => {
-      this.emailsFC = emails
-      this.dataSource = new MatTableDataSource(this.emailsFC);
-      setTimeout(() => this.dataSource.paginator = this.paginator);
-      setTimeout(() => this.dataSource.sort = this.sort);
-    });  
+      .pipe(first())
+      .subscribe(emails => {
+        this.emailsFC = emails
+        this.dataSource = new MatTableDataSource(this.emailsFC);
+        setTimeout(() => this.dataSource.paginator = this.paginator);
+        setTimeout(() => this.dataSource.sort = this.sort);
+      });
   }
 
   ngAfterViewInit() {
@@ -55,12 +55,12 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
     this.emailsFCService.delete(id)
       .pipe(first())
       .subscribe(() => this.emailsFC = this.emailsFC.filter((x: any) => x.id !== id));
-      this.deleteRowDataTable();
+    this.deleteRowDataTable();
   }
-  private deleteRowDataTable(){
+  private deleteRowDataTable() {
     this.dataSource.paginator = this.paginator;
     window.location.reload();
-    
+
   }
 
   //
@@ -70,7 +70,6 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -79,7 +78,6 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
     this.selection.select(...this.dataSource.data);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: EmailFromContact): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;

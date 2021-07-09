@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/core/services/alert-service.service';
-import { ContactService } from 'src/app/core/services/contact.service';
 import { EmailFromContactService } from 'src/app/core/services/email-from-contact.service';
 
 @Component({
@@ -23,7 +22,6 @@ export class ContactComponent implements OnInit {
     private alertService: AlertService,
     private router: Router,
     private builder?: FormBuilder,
-    private contact?: ContactService,
     private emailService?: EmailFromContactService,
 
   ) { }

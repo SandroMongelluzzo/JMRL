@@ -28,6 +28,9 @@ const routes: Routes = [
     path: 'emailsFC', loadChildren: () => import('src/app/features/admin/manage-emails/emails-fc.module').then(m => m.EmailsFCModule), canActivate: [AuthGuard, AdminGuard]
   },
   {
+    path: 'tickets', loadChildren: () => import('src/app/features/tickets/ticket.module').then(m => m.TicketModule), canActivate: [AuthGuard]
+  },
+  {
     path: 'account', loadChildren: () => import('src/app/public/account-module/account.module').then(m => m.AccountModule), //canActivate: [AuthGuard] 
   },
 
