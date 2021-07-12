@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Type } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/core/services/alert-service.service';
 import { VehicleService } from 'src/app/core/services/vehicle.service';
-import { first } from 'rxjs/operators';
+import { first, map, startWith } from 'rxjs/operators';
+import { Vehicle } from 'src/app/model/vehicle';
+import { Observable } from 'rxjs';
 
+export interface VehicleTypes {
+  type: string;
+}
 
 @Component({
   selector: 'app-vehicleedit',
@@ -12,7 +17,15 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./vehicleedit.component.css']
 })
 export class VehicleeditComponent implements OnInit {
-
+  //
+  myControl = new FormControl();
+  options: VehicleTypes[] = [
+    {type: 'Truck'},
+    {type: 'Van'},
+    {type: 'OffRoad'},
+  ];
+  filteredOptions?: Observable<VehicleTypes[]>;
+  //
   form?: FormGroup;
   id?: string;
   isAddMode?: boolean;
@@ -46,6 +59,17 @@ export class VehicleeditComponent implements OnInit {
         .pipe(first())
         .subscribe(x => this.form?.patchValue(x));
     }
+
+    //
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(type => type ? this._filter(type) : this.options!.slice())
+        
+        //map(value => this._filter(value))
+        //map(value => value ? this._filter(value) : this.options!.slice())
+      );
   }
 
   get f() { return this.form?.controls; }
@@ -71,32 +95,43 @@ export class VehicleeditComponent implements OnInit {
 
   private createVehicle() {
     this.vehicleService.register(this.form?.value)
-        .pipe(first())
-        .subscribe({
-            next: () => {
-                this.alertService.success('Vehicle added successfully', { keepAfterRouteChange: true });
-                this.router.navigate(['../'], { relativeTo: this.route });
-            },
-            error: error => {
-                this.alertService.error(error);
-                this.loading = false;
-            }
-        });
-}
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Vehicle added successfully', { keepAfterRouteChange: true });
+          this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
+  }
 
-private updateVehicle() {
+  private updateVehicle() {
     this.vehicleService.update(this.id!, this.form?.value)
-        .pipe(first())
-        .subscribe({
-            next: () => {
-                this.alertService.success('Update successful', { keepAfterRouteChange: true });
-                this.router.navigate(['../'], { relativeTo: this.route });
-            },
-            error: error => {
-                this.alertService.error(error);
-                this.loading = false;
-            }
-        });
-}
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Update successful', { keepAfterRouteChange: true });
+          this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
+  }
+  //
+  displayFn(vehicle: VehicleTypes): string {
+    return vehicle && vehicle.type ? vehicle.type : '';
+  }
+
+  private _filter(type: string): VehicleTypes[] {
+    const filterValue = type.toLowerCase();
+
+    return this.options!.filter((option: { type: string; }) => option.type.toLowerCase().includes(filterValue));
+  }
+
 
 }

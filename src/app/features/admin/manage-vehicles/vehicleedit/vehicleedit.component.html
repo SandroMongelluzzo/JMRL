@@ -4,14 +4,31 @@
     <div class="form-row">
         <div class="form-group col">
             <label for="type">Type</label>
-            <input type="text" formControlName="type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.type?.errors }" />
+            <input type="text" formControlName="type" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.type?.errors }" />
             <div *ngIf="submitted && f?.type?.errors" class="invalid-feedback">
                 <div *ngIf="f?.type?.errors?.required">Type is required</div>
             </div>
+            <!-- <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label for="type">Type</mat-label>
+                <input type="string" formControlName="type" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f?.type?.errors }" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto" />
+                <div *ngIf="submitted && f?.type?.errors" class="invalid-feedback">
+                    <div *ngIf="f?.type?.errors?.required">Type is required</div>
+                </div>
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of filteredOptions | async " [value]="option" >
+                        {{option.type }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field> -->
+
         </div>
         <div class="form-group col">
             <label for="manufacturer">Manufacturer</label>
-            <input type="text" formControlName="manufacturer" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.manufacturer?.errors }" />
+            <input type="text" formControlName="manufacturer" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.manufacturer?.errors }" />
             <div *ngIf="submitted && f?.manufacturer?.errors" class="invalid-feedback">
                 <div *ngIf="f?.manufacturer?.errors?.required">Manufacturer is required</div>
             </div>
@@ -21,7 +38,8 @@
     <div class="form-row">
         <div class="form-group col">
             <label for="model">Model</label>
-            <input type="text" formControlName="model" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.model?.errors }" />
+            <input type="text" formControlName="model" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.model?.errors }" />
             <div *ngIf="submitted && f?.model?.errors" class="invalid-feedback">
                 <div *ngIf="f?.model?.errors?.required">Model is required</div>
             </div>
@@ -31,7 +49,8 @@
                 Plate
                 <em *ngIf="!isAddMode">(Leave blank to keep the same Plate)</em>
             </label>
-            <input type="plate" formControlName="plate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.plate?.errors }" />
+            <input type="plate" formControlName="plate" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.plate?.errors }" />
             <div *ngIf="submitted && f?.plate?.errors" class="invalid-feedback">
                 <div *ngIf="f?.plate?.errors?.required">Plate is required</div>
                 <div *ngIf="f?.plate?.errors?.minlength">Plate must be at least 6 characters</div>
@@ -42,29 +61,32 @@
     <div class="form-row">
         <div class="form-group col">
             <label for="matriculation">Matriculation</label>
-            <input type="text" formControlName="matriculation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.matriculation?.errors }" />
+            <input type="text" formControlName="matriculation" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.matriculation?.errors }" />
             <div *ngIf="submitted && f?.matriculation?.errors" class="invalid-feedback">
                 <div *ngIf="f?.matriculation?.errors?.required">Matriculation is required</div>
             </div>
         </div>
         <div class="form-group col">
             <label for="available">Available</label>
-            
-            <input type="text" formControlName="available" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.available?.errors }" />
+
+            <input type="text" formControlName="available" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.available?.errors }" />
             <div *ngIf="submitted && f?.available?.errors" class="invalid-feedback">
                 <div *ngIf="f?.available?.errors?.required">Available is required</div>
             </div>
         </div>
     </div>
-     
+
     <div class="form-row">
         <div class="form-group col">
             <label for="imageUrl">ImageUrl</label>
-            <input type="text" formControlName="imageUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.imageUrl?.errors }" />
+            <input type="text" formControlName="imageUrl" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.imageUrl?.errors }" />
             <div *ngIf="submitted && f?.imageUrl?.errors" class="invalid-feedback">
                 <div *ngIf="f?.imageUrl?.errors?.required">ImageUrl is required</div>
             </div>
-        </div>        
+        </div>
     </div>
 
     <div class="form-group">
@@ -75,3 +97,10 @@
         <a routerLink="/vehicles" class="btn btn-link">Cancel</a>
     </div>
 </form>
+
+<p>DA IMPLEMENTARE:</p>
+<p>- TYPE & MANUFACTURER INPUT CON AUTOCOMPLETE </p>
+<p>- CONTROLLO FORMATO TARGA "NN CCC NNN" DOVE N NUMERO C CHAR</p>
+<p>- MATRICULATION CON DATEPICKER</p>
+<p>- AVAILABLE SELEZIONABILE TRAMITE MENU A TENDINA O RADIO ;</p>
+<p>- IMG CON UPLOAD</p>

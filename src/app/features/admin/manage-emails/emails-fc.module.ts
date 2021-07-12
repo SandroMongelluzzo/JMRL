@@ -21,9 +21,9 @@ import { EmailsEditComponent } from './emails-edit/emails-edit.component';
   ],
   imports: [
     CommonModule,
+    EmailsFCRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    EmailsFCRoutingModule,
     MatPaginatorModule,
     MatFormFieldModule,
     MatTableModule,
