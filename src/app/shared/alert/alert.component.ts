@@ -16,7 +16,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     @Input() id = 'default-alert';
     @Input() fade = true;
 
-    alerts!: Alert[];
+    alerts?: Alert[];
     alertSubscription!: Subscription;
     routeSubscription!: Subscription;
 
@@ -32,15 +32,15 @@ export class AlertComponent implements OnInit, OnDestroy {
                 // clear alerts when an empty alert is received
                 if (!alert.message) {
                     // filter out alerts without 'keepAfterRouteChange' flag
-                    this.alerts = this.alerts.filter(x => x.keepAfterRouteChange);
+                    this.alerts = this.alerts?.filter(x => x.keepAfterRouteChange);
 
                     // remove 'keepAfterRouteChange' flag on the rest
-                    this.alerts.forEach(x => delete x.keepAfterRouteChange);
+                    this.alerts?.forEach(x => delete x.keepAfterRouteChange);
                     return;
                 }
 
                 // add alert to array
-                this.alerts.push(alert);
+                this.alerts?.push(alert);
 
                 // auto close alert if required
                 if (alert.autoClose) {
@@ -64,7 +64,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
     removeAlert(alert: Alert) {
         // check if already removed to prevent error on auto close
-        if (!this.alerts.includes(alert)) return;
+        if (!this.alerts?.includes(alert)) return;
 
         if (this.fade) {
             // fade out alert
@@ -72,7 +72,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
             // remove alert after faded out
             setTimeout(() => {
-                this.alerts = this.alerts.filter(x => x !== alert);
+                this.alerts = this.alerts?.filter(x => x !== alert);
             }, 250);
         } else {
             // remove alert
