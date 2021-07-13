@@ -53,7 +53,7 @@ export class AccountService {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
 
-    getById(id: string) {
+    getById(id: number) {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
@@ -61,7 +61,7 @@ export class AccountService {
         return this.http.get<User>(`${environment.apiUrl}/users/${email}`);
       }*/
 
-    update(id: string, params: any) {
+    update(id: number, params: any) {
         return this.http.put(`${environment.apiUrl}/users/${id}`, params)
             .pipe(map(x => {
                 // update stored user if the logged in user updated their own record
@@ -77,7 +77,7 @@ export class AccountService {
             }));
     }
 
-    delete(id: string) {
+    delete(id: number) {
         return this.http.delete(`${environment.apiUrl}/users/${id}`)
             .pipe(map(x => {
                 // auto logout if the logged in user deleted their own record

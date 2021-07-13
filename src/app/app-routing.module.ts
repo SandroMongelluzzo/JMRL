@@ -31,6 +31,9 @@ const routes: Routes = [
     path: 'adminPage', loadChildren: () => import('src/app/features/admin/admin-page/admin-page.module').then(m => m.AdminPageModule), canActivate: [AuthGuard, AdminGuard]
   },
   {
+    path: 'tickets/manage', loadChildren: () => import('src/app/features/admin/manage-tickets/ticket-manage.module').then(m => m.TicketManageModule), canActivate: [AuthGuard, AdminGuard]
+  },
+  {
     path: 'tickets', loadChildren: () => import('src/app/features/tickets/ticket.module').then(m => m.TicketModule), canActivate: [AuthGuard]
   },
   {

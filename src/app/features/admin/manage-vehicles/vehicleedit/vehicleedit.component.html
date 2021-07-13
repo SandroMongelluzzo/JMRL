@@ -4,9 +4,7 @@
     <div class="form-row">
         <div class="form-group col">
 
-
             <mat-form-field for="type" class="vehicleType-matFormField" appearance="outline" floatLabel="always">
-
                 <mat-label>Type</mat-label>
                 <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" formControlName="type"
                     class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.type?.errors }"
@@ -42,6 +40,7 @@
                 <div *ngIf="f?.model?.errors?.required">Model is required</div>
             </div>
         </div>
+
         <div class="form-group col">
             <label for="plate">
                 Plate
@@ -65,23 +64,22 @@
                 <div *ngIf="f?.matriculation?.errors?.required">Matriculation is required</div>
             </div>
         </div>
+
         <div class="form-group col">
-
-
             <label id="available-radio-Group-Label" for="available">Pick available</label>
             <mat-radio-group aria-labelledby="available-radio-Group-Label" formControlName="available"
                 class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.available?.errors }">
-                <mat-radio-button class="example-radio-button" class="available-radioGroupLabe" *ngFor="let available of availables"
-                    [checked]="available==checked" [value]="available" (click)="availability=available">
-
+                <mat-radio-button class="example-radio-button" class="available-radioGroupLabe"
+                    *ngFor="let available of availables" [checked]="available==checked" [value]="available"
+                    (click)="availability=available">
                     {{available}}
                 </mat-radio-button>
             </mat-radio-group>
             <div *ngIf="submitted && f?.available?.errors" class="invalid-feedback">
                 <div *ngIf="f?.available?.errors?.required">Available is required</div>
             </div>
-
         </div>
+
     </div>
 
     <div class="form-row">

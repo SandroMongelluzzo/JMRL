@@ -1,4 +1,4 @@
-<h1>Your Tickets</h1>
+<h1>Tickets</h1>
 <a routerLink="add" class="btn btn-sm btn-success mb-2">New Ticket</a>
 
 
@@ -38,7 +38,12 @@
         <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Options</th>
             <td mat-cell *matCellDef="let element">
-                <a routerLink="read/{{element.id}}" class="btn btn-sm btn-primary mr-1">Open</a>
+                <a routerLink="edit/{{element.id}}" class="btn btn-sm btn-primary mr-1">Open</a>
+                <button (click)="deleteUserTicket(element.id)" class="btn btn-sm btn-danger btn-delete-emailFC"
+                    [disabled]="element.isDeleting">
+                    <span *ngIf="element.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!element.isDeleting">Delete</span>
+                </button>
             </td>
         </ng-container>
 
@@ -54,11 +59,6 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
 
-<!-- <button (click)="deleteEmailfc(element.id)" class="btn btn-sm btn-danger btn-delete-emailFC"
-  [disabled]="element.isDeleting">
-  <span *ngIf="element.isDeleting" class="spinner-border spinner-border-sm"></span>
-  <span *ngIf="!element.isDeleting">Delete</span>
-</button> -->
 
 <!-- <ng-container matColumnDef="attachment">
     <th mat-header-cell *matHeaderCellDef mat-sort-header class="attachment"> Attachment </th>

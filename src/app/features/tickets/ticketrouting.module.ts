@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutTicketComponent } from './layout-ticket/layout-ticket.component';
 import { NewTicketComponent } from './new-ticket/new-ticket.component';
 import { ListTicketComponent } from './list-ticket/list-ticket.component';
+import { ReadticketComponent } from './readticket/readticket.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ListTicketComponent },
       { path: 'add', component: NewTicketComponent },
+      { path: 'read/:id', component: ReadticketComponent}
     ]
   }
 ];

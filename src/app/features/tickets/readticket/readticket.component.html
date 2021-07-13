@@ -1,0 +1,81 @@
+<h1 *ngIf="isAddMode">New Ticket</h1>
+<h1 *ngIf="!isAddMode">Read Ticket</h1>
+
+<form [formGroup]="form!" (ngSubmit)="onSubmit()">
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="userId">User Id</label>
+            <input type="text" formControlName="userId" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.userId?.errors }" readonly/>
+            <div *ngIf="submitted && f?.userId?.errors" class="invalid-feedback">
+                <div *ngIf="f?.userId?.errors?.required">User Id is required</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="userEmail">User Email</label>
+            <input type="text" formControlName="userEmail" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.userEmail?.errors }" readonly/>
+            <div *ngIf="submitted && f?.userEmail?.errors" class="invalid-feedback">
+                <div *ngIf="f?.userEmail?.errors?.required">User Email is required</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="userName">UserName</label>
+            <input type="text" formControlName="userName" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.userName?.errors }" readonly/>
+            <div *ngIf="submitted && f?.userName?.errors" class="invalid-feedback">
+                <div *ngIf="f?.userName?.errors?.required">UserName is required</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="type">Type</label>
+            <input type="text" formControlName="type" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.type?.errors }" readonly/>
+            <div *ngIf="submitted && f?.type?.errors" class="invalid-feedback">
+                <div *ngIf="f?.type?.errors?.required">Type is required</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="content">Content</label>
+            <input type="text" formControlName="content" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.content?.errors }"  readonly/>
+            <div *ngIf="submitted && f?.content?.errors" class="invalid-feedback">
+                <div *ngIf="f?.content?.errors?.required">Content is required</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="comment">Comment</label>
+            <input type="text" formControlName="comment" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.comment?.errors }" readonly/>
+            <div *ngIf="submitted && f?.comment?.errors" class="invalid-feedback">
+                <div *ngIf="f?.comment?.errors?.required">Comment is required</div>
+            </div>
+        </div>     
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="attachment">attachment</label>
+            <input type="text" formControlName="attachment" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f?.attachment?.errors }" readonly/>
+            <div *ngIf="submitted && f?.attachment?.errors" class="invalid-feedback">
+                <div *ngIf="f?.attachment?.errors?.required">attachment is required</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <!-- <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+        </button> -->
+        <a routerLink="/tickets" class="btn btn-link">Go Back</a>
+    </div>
+</form>

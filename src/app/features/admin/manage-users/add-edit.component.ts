@@ -10,7 +10,7 @@ import { AlertService } from 'src/app/core/services/alert-service.service';
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
     form?: FormGroup;
-    id?: string;
+    id?: number;
     isAddMode?: boolean;
     loading = false;
     submitted = false;

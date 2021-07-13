@@ -19,9 +19,7 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private emailsFCService: EmailFromContactService) {
-
-  }
+  constructor(private emailsFCService: EmailFromContactService) {  }
   displayedColumns: string[] = ['select', 'id', 'emailAddress', 'name2', 'comment', 'open'];
   selection = new SelectionModel<EmailFromContact>(true, []);
 

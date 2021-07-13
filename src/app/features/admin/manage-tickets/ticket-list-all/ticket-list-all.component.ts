@@ -1,21 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { TicketService } from 'src/app/core/services/ticket.service';
-import { Ticket } from 'src/app/model/ticket';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account-service.service';
+import { TicketService } from 'src/app/core/services/ticket.service';
+import { Ticket } from 'src/app/model/ticket';
 import { User } from 'src/app/model/user';
+import { SelectionModel } from '@angular/cdk/collections';
 
 
 @Component({
-  selector: 'app-list-ticket',
-  templateUrl: './list-ticket.component.html',
-  styleUrls: ['./list-ticket.component.css']
+  selector: 'app-ticket-list-all',
+  templateUrl: './ticket-list-all.component.html',
+  styleUrls: ['./ticket-list-all.component.css']
 })
-export class ListTicketComponent implements OnInit {
+export class TicketListAllComponent implements OnInit {
+
   userTicket = null as any;
   dataSource = null as any;
   user?: User;
@@ -42,7 +43,7 @@ export class ListTicketComponent implements OnInit {
     this.userTicketService.getAll()
     .pipe(first())
     .subscribe(tickets => {
-      this.userTicket = tickets.filter(ele => ele.userId==this.user?.id)
+      this.userTicket = tickets //.filter(ele => ele.userId==this.user?.id)
       this.dataSource = new MatTableDataSource(this.userTicket);
       setTimeout(() => this.dataSource.paginator = this.paginator);
       setTimeout(() => this.dataSource.sort = this.sort);
@@ -58,7 +59,7 @@ export class ListTicketComponent implements OnInit {
     }
   }
 
- /* deleteUserTicket(id: number) {
+  deleteUserTicket(id: number) {
     const userticket = this.userTicket.find((x: any) => x.id === id);
     userticket.isDeleting = true;
     this.userTicketService.delete(id)
@@ -70,6 +71,6 @@ export class ListTicketComponent implements OnInit {
   private deleteRowDataTable() {
     this.dataSource.paginator = this.paginator;
     window.location.reload();
-  }*/
+  }
 
 }
