@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -36,9 +37,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatSortModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    MatAutocompleteModule
-    
-
-  ]
+    MatAutocompleteModule,
+    MatRadioModule,
+    ]
 })
 export class VehiclesModule { }

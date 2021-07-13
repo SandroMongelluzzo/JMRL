@@ -57,17 +57,21 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
       .subscribe(() => this.emailsFC = this.emailsFC.filter((x: any) => x.id !== id));
     this.deleteRowDataTable();
   }
+
   private deleteRowDataTable() {
     this.dataSource.paginator = this.paginator;
     window.location.reload();
-
   }
 
   //
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.dataSource?.data?.length;
     return numSelected === numRows;
+  }
+
+  deleteSelected(){   
+   this.selection.selected.forEach(element => this.deleteEmailfc(element.id));
   }
 
   masterToggle() {

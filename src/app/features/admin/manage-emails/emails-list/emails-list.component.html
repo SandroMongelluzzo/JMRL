@@ -43,7 +43,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Options</th>
       <td mat-cell *matCellDef="let element">
         <a routerLink="edit/{{element.id}}" class="btn btn-sm btn-primary mr-1">Open</a>
-        <button (click)="deleteEmailfc(element.id)" class="btn btn-sm btn-danger btn-delete-vehicle"
+        <button (click)="deleteEmailfc(element.id)" class="btn btn-sm btn-danger btn-delete-emailFC"
           [disabled]="element.isDeleting">
           <span *ngIf="element.isDeleting" class="spinner-border spinner-border-sm"></span>
           <span *ngIf="!element.isDeleting">Delete</span>
@@ -54,12 +54,19 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
 
+
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
     </tr>
-  </table>
 
+    
+  </table>
+  
+  <button (click)="deleteSelected()" class="btn btn-sm btn-danger btn-delete-emailFC">
+    <span>Delete Selected</span>
+  </button>
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
 </div>
 
 <p>DA IMPLEMENTARE:</p>

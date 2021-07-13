@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/core/services/alert-service.service';
 import { VehicleService } from 'src/app/core/services/vehicle.service';
 import { first, map, startWith } from 'rxjs/operators';
-import { Vehicle } from 'src/app/model/vehicle';
 import { Observable } from 'rxjs';
 import { MatOption } from '@angular/material/core';
 import { VehicleType } from 'src/app/model/vehicleType';
@@ -18,9 +17,15 @@ import { VehicleTypeService } from 'src/app/core/services/vehicle-type.service';
   styleUrls: ['./vehicleedit.component.css']
 })
 export class VehicleeditComponent implements OnInit {
+
+  availability!: string;
+  availables: string[] = ['true', 'false'];
+  checked = null as any;
+
   //
   myControl = new FormControl();
   options?: VehicleType[];
+  loadedType = null as any;
 
   filteredOptions?: Observable<VehicleType[]>;
   //
@@ -43,18 +48,18 @@ export class VehicleeditComponent implements OnInit {
   ngOnInit(): void {
 
     this.vehicleTypeService.getAll()
-    .pipe(first())
-    .subscribe(vehicles2 => this.options = vehicles2);
-    
-    
-    
+      .pipe(first())
+      .subscribe(vehicles2 => this.options = vehicles2);
+
+
+
     /* for (var i = 0; i < this.options!.length; i++) {
       console.log(JSON.stringify(this.options![i].type))
     }*/
-    
+
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
-    
+
     this.form = this.formBuilder.group({
       type: ['', Validators.required],
       manufacturer: ['', Validators.required],
@@ -64,29 +69,31 @@ export class VehicleeditComponent implements OnInit {
       available: ['', Validators.required],
       imageUrl: ['', Validators.required],
     });
-    
+
     if (!this.isAddMode) {
       this.vehicleService.getById(this.id!)
-      .pipe(first())
-      .subscribe(x => {
-        this.form?.patchValue(x)
-        //this.form?.controls['myControl'].setValue('2');
-      }
-      );
+        .pipe(first())
+        .subscribe(x => {
+          this.form?.patchValue(x)
+          this.loadedType = x.type;
+          this.availability = x.available.toString();
+          this.checked = this.availability;
+        }
+        );
     }
-    
+
     //
     setTimeout(() => {
       this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.type),
-        map(type => type ? this._filter(type) : this.options!.slice())
-        
-        //map(value => this._filter(value))
-        //map(value => value ? this._filter(value) : this.options!.slice())
+        .pipe(
+          startWith(''),
+          map(value => typeof value === 'string' ? value : value.type),
+          map(type => type ? this._filter(type) : this.options!.slice())
+
+          //map(value => this._filter(value))
+          //map(value => value ? this._filter(value) : this.options!.slice())
         );
-    }, 1500);
+    }, 500);
   }
 
   get f() { return this.form?.controls; }
@@ -127,7 +134,7 @@ export class VehicleeditComponent implements OnInit {
   }
 
   private updateVehicle() {
-    this.form!.value.type = this.form!.value.type.type.trim();
+    this.form!.value.type = this.form!.value.type.type//.trim();
     this.vehicleService.update(this.id!, this.form?.value)
       .pipe(first())
       .subscribe({

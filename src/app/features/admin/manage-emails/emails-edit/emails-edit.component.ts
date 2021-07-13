@@ -44,7 +44,7 @@ export class EmailsEditComponent implements OnInit {
         .pipe(first())
         .subscribe(x => {
           this.form?.patchValue(x);
-          console.log(x.attachmentURL)
+          //console.log(x.attachmentURL)
           this.iUrl = x.attachmentURL
         });
     }

@@ -1,7 +1,10 @@
 footer{
-    background-color: crimson;
+    background-color: teal;
     z-index:1000;
 }
 a{
-    color: black
+    color: whitesmoke
+}
+.footer-copyright{
+    color: whitesmoke;
 }
