@@ -11,7 +11,8 @@ import { AdminPageComponent } from './admin-page.component';
   ],
   imports: [
     CommonModule,
-    AdminPageRoutingModule
+    AdminPageRoutingModule,
+    
   ]
 })
 export class AdminPageModule { }

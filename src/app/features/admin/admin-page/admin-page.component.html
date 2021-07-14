@@ -1,5 +1,14 @@
 <h1>Welcome Admin: {{user?.firstName}} {{user?.lastName}}</h1>
+<hr>
+<div class="buttons">
+    <a routerLink="./manageTypeVehicle" class="btn btn-info">Manage Vehicle Types</a>
+</div>
+<div class="buttons">
+    <a routerLink="./manageManufacturerVehicle" class="btn btn-info">Manage Vehicle Manufacturer</a>
+</div>
+<a routerLink="./" class="btn btn-outline-warning">Close</a>
 
-<h5>DA IMPLEMENTARE:</h5>
-<p>- aggiungere add vehicleType;</p>
-<p>- aggiungere add Manufacturer;</p>
+
+<hr>
+
+<router-outlet></router-outlet>

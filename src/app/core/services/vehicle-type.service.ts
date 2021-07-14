@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Vehicle } from 'src/app/model/vehicle';
 import { VehicleType } from 'src/app/model/vehicleType';
 import { environment } from 'src/environments/environment';
 

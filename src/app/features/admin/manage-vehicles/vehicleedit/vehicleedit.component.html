@@ -8,7 +8,7 @@
                 <mat-label>Type</mat-label>
                 <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" formControlName="type"
                     class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.type?.errors }"
-                    [placeholder]="loadedType" [defaultValue]="loadedType" />
+                    [placeholder]="loadedType || 'Insert Type'" [defaultValue]="loadedType" />
                 <div *ngIf="submitted && f?.type?.errors" class="invalid-feedback">
                     <div *ngIf="f?.type?.errors?.required">Type is required</div>
                 </div>
@@ -50,7 +50,9 @@
                 [ngClass]="{ 'is-invalid': submitted && f?.plate?.errors }" />
             <div *ngIf="submitted && f?.plate?.errors" class="invalid-feedback">
                 <div *ngIf="f?.plate?.errors?.required">Plate is required</div>
-                <div *ngIf="f?.plate?.errors?.minlength">Plate must be at least 6 characters</div>
+                <div *ngIf="f?.plate?.errors?.minlength">Plate must 8 characters</div>
+                <div *ngIf="f?.plate?.errors?.maxlength">Plate must 8 characters</div>
+
             </div>
         </div>
     </div>

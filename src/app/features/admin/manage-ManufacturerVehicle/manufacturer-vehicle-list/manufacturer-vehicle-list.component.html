@@ -1,0 +1,33 @@
+<h3>Manufacturers</h3>
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef> Options</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <a routerLink="edit/{{element.id}}" class="btn btn-sm btn-primary mr-1">Open</a>
+            <button (click)="deleteManufacturerVehicle(element.id)" class="btn btn-sm btn-danger btn-delete-emailFC"
+                [disabled]="element.isDeleting">
+                <span *ngIf="element.isDeleting" class="spinner-border spinner-border-sm"></span>
+                <span *ngIf="!element.isDeleting">Delete</span>
+            </button>
+        </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  
+
+<a routerLink="new" class="btn btn-success">New Manufacturer</a>
+
