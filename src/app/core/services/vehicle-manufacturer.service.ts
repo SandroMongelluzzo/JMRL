@@ -15,12 +15,10 @@ export class VehicleManufacturerService {
   data?: VehicleManufacturer;
 
   constructor(
-
     private http: HttpClient,
   ) {
     this.vehicleManufacturerSubject = new BehaviorSubject<VehicleManufacturer>(JSON.parse(localStorage.getItem('vehicle') as string));
     this.vehicleManufacturerMain = this.vehicleManufacturerSubject.asObservable();
-
   }
 
   public get vehicleManufacturerValue(): VehicleManufacturer {
@@ -55,6 +53,4 @@ export class VehicleManufacturerService {
     return this.http.delete(`${environment.apiUrl}/vehicleManufacturers/${id}`)
       .pipe(map(x => x));
   };
-
-
 }

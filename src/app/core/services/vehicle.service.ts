@@ -17,7 +17,6 @@ export class VehicleService {
   data?: Vehicle;
 
   constructor(
-
     private http: HttpClient,
   ) {
     this.vehicleSubject = new BehaviorSubject<Vehicle>(JSON.parse(localStorage.getItem('vehicle') as string));
@@ -57,6 +56,4 @@ export class VehicleService {
     return this.http.delete(`${environment.apiUrl}/vehicles/${id}`)
       .pipe(map(x => x));
   };
-
-
 }

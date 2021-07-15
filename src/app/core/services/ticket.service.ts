@@ -15,7 +15,6 @@ export class TicketService {
   data?: Ticket;
 
   constructor(
-
     private http: HttpClient,
   ) {
     this.ticketSubject = new BehaviorSubject<Ticket>(JSON.parse(localStorage.getItem('ticket') as string));

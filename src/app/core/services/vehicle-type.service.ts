@@ -14,12 +14,10 @@ export class VehicleTypeService {
   data?: VehicleType;
 
   constructor(
-
     private http: HttpClient,
   ) {
     this.vehicleTypeSubject = new BehaviorSubject<VehicleType>(JSON.parse(localStorage.getItem('vehicle') as string));
     this.vehicleTypeMain = this.vehicleTypeSubject.asObservable();
-
   }
 
   public get vehicleTypeValue(): VehicleType {
@@ -54,6 +52,4 @@ export class VehicleTypeService {
     return this.http.delete(`${environment.apiUrl}/vehicleTypes/${id}`)
       .pipe(map(x => x));
   };
-
-
 }

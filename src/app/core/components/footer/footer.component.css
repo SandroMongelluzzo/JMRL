@@ -1,10 +1,12 @@
-footer{
+footer {
     background-color: teal;
-    z-index:1000;
+    z-index: 1000;
 }
-a{
+
+a {
     color: whitesmoke
 }
-.footer-copyright{
+
+.footer-copyright {
     color: whitesmoke;
 }

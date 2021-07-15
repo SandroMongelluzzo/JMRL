@@ -19,6 +19,7 @@ export class AdminGuard implements CanActivate {
       const user = this.accountService.userValue;
       if(!user.admin)
       {
+      // not logged in as admin redirect to login page with the return url
         this.router.navigateByUrl('');
         return false;
       }

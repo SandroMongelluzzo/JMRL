@@ -16,7 +16,6 @@ export class EmailFromContactService {
   data?: EmailFromContact;
 
   constructor(
-
     private http: HttpClient,
   ) {
     this.emailFCSubject = new BehaviorSubject<EmailFromContact>(JSON.parse(localStorage.getItem('email') as string));
@@ -51,7 +50,7 @@ export class EmailFromContactService {
       }));
   }
 
-  delete(id: string) { //dovrebbe funzionare
+  delete(id: string) {
     return this.http.delete(`${environment.apiUrl}/emailsFC/${id}`)
       .pipe(map(x => x));
   };
