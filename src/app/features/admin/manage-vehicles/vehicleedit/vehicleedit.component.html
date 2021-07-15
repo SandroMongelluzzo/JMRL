@@ -1,151 +1,9 @@
-<!-- <h1 *ngIf="isAddMode">Add Vehicle</h1>
-<h1 *ngIf="!isAddMode">Edit Vehicle</h1>
-<form [formGroup]="form!" (ngSubmit)="onSubmit()">
-    <div class="form-row">
-        <div class="form-group col">
-
-            <mat-form-field for="type" class="vehicleType-matFormField" appearance="outline" floatLabel="always">
-                <mat-label>Type</mat-label>
-                <input type="text" matInput [formControl]="myControlType" [matAutocomplete]="autoType"
-                    formControlName="type" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f?.type?.errors }"
-                    [placeholder]="loadedType || 'Insert Type'" [defaultValue]="loadedType" />
-                <div *ngIf="submitted && f?.type?.errors" class="invalid-feedback">
-                    <div *ngIf="f?.type?.errors?.required">Type is required</div>
-                </div>
-                <mat-autocomplete #autoType="matAutocomplete" [displayWith]="displayFnType"
-                    (optionSelected)="OnTypeSelected($event.option)">
-                    <mat-option *ngFor="let optionType of filteredOptionsType | async " [value]="optionType"
-                        (click)="ShowTypeId()">
-                        {{optionType.type}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </div>
-        <mat-form-field for="manufacturer" class="vehicleManufacturer-matFormField" appearance="outline"
-            floatLabel="always">
-            <mat-label>Manufacturer</mat-label>
-            <input type="text" matInput [formControl]="myControlManufacturer" [matAutocomplete]="autoManufacturer"
-                formControlName="manufacturer" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.manufacturer?.errors }"
-                [placeholder]="loadedManufacturer || 'Insert Manufacturer'" [defaultValue]="loadedManufacturer" />
-            <div *ngIf="submitted && f?.manufacturer?.errors" class="invalid-feedback">
-                <div *ngIf="f?.manufacturer?.errors?.required">manufacturer is required</div>
-            </div>
-            <mat-autocomplete #autoManufacturer="matAutocomplete" [displayWith]="displayFnManufacturer"
-                (optionSelected)="OnManufacturerSelected($event.option)">
-                <mat-option *ngFor="let optionManufacturer of filteredOptionsManufacturer | async "
-                    [value]="optionManufacturer" (click)="ShowManufacturerId()">
-                    {{optionManufacturer.name}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col" [hidden]="hideTypeId">
-            <label for="typeId">TypeId</label>
-            <input type="text" formControlName="typeId" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.typeId?.errors }"
-                [placeholder]="typeSelected_autocomplete?.id || 'TypeId'" [defaultValue]="typeSelected_autocomplete?.id"
-                readonly />
-            <div *ngIf="submitted && f?.typeId?.errors" class="invalid-feedback">
-                <div *ngIf="f?.typeId?.errors?.required">TypeId is required</div>
-            </div>
-        </div>
-
-        <div class="form-group col" [hidden]="hideManufacturerId">
-            <label for="manufacturerId">Manufacturer Id</label>
-            <input type="text" formControlName="manufacturerId" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.manufacturerId?.errors }"
-                [placeholder]="manufacturerSelected_autocomplete?.id || 'Manufacturer Id'"
-                [defaultValue]="manufacturerSelected_autocomplete?.id" readonly />
-            <div *ngIf="submitted && f?.manufacturerId?.errors" class="invalid-feedback">
-                <div *ngIf="f?.manufacturerId?.errors?.required">Manufacturer Id is required</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col">
-            <label for="model">Model</label>
-            <input type="text" formControlName="model" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.model?.errors }" />
-            <div *ngIf="submitted && f?.model?.errors" class="invalid-feedback">
-                <div *ngIf="f?.model?.errors?.required">Model is required</div>
-            </div>
-        </div>
-
-        <div class="form-group col">
-            <label for="plate">
-                Plate
-                <em *ngIf="!isAddMode">(Leave blank to keep the same Plate)</em>
-            </label>
-            <input type="plate" formControlName="plate" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.plate?.errors }" />
-            <div *ngIf="submitted && f?.plate?.errors" class="invalid-feedback">
-                <div *ngIf="f?.plate?.errors?.required">Plate is required</div>
-                <div *ngIf="f?.plate?.errors?.minlength">Plate must 8 characters</div>
-                <div *ngIf="f?.plate?.errors?.maxlength">Plate must 8 characters</div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col">
-            <label for="matriculation">Matriculation</label>
-            <input type="text" formControlName="matriculation" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.matriculation?.errors }" />
-            <div *ngIf="submitted && f?.matriculation?.errors" class="invalid-feedback">
-                <div *ngIf="f?.matriculation?.errors?.required">Matriculation is required</div>
-            </div>
-        </div>
-
-        <div class="form-group col">
-            <label id="available-radio-Group-Label" for="available">Pick available</label>
-            <mat-radio-group aria-labelledby="available-radio-Group-Label" formControlName="available"
-                class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.available?.errors }">
-                <mat-radio-button class="example-radio-button" class="available-radioGroupLabe"
-                    *ngFor="let available of availables" [checked]="available==checked" [value]="available"
-                    (click)="availability=available">
-                    {{available}}
-                </mat-radio-button>
-            </mat-radio-group>
-            <div *ngIf="submitted && f?.available?.errors" class="invalid-feedback">
-                <div *ngIf="f?.available?.errors?.required">Available is required</div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col">
-            <label for="imageUrl">ImageUrl</label>
-            <input type="text" formControlName="imageUrl" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.imageUrl?.errors }" />
-            <div *ngIf="submitted && f?.imageUrl?.errors" class="invalid-feedback">
-                <div *ngIf="f?.imageUrl?.errors?.required">ImageUrl is required</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Save
-        </button>
-        <a routerLink="/vehicles" class="btn btn-link">Cancel</a>
-    </div>
-</form> -->
-
-
 <h1 *ngIf="isAddMode">Add Vehicle</h1>
 <h1 *ngIf="!isAddMode">Edit Vehicle</h1>
 <form [formGroup]="form!" (ngSubmit)="onSubmit()">
+
     <div class="form-row">
         <div class="form-group col">
-
             <mat-form-field for="type" class="vehicleType-matFormField" appearance="outline" floatLabel="always">
                 <mat-label>Type</mat-label>
                 <input type="text" matInput [formControl]="myControlType" [matAutocomplete]="autoType"
@@ -195,7 +53,6 @@
                 <div *ngIf="f?.typeId?.errors?.required">TypeId is required</div>
             </div>
         </div>
-
         <div class="form-group col" [hidden]="hideManufacturerId">
             <label for="manufacturerId">Manufacturer Id</label>
             <input type="text" formControlName="manufacturerId" class="form-control"
@@ -217,7 +74,6 @@
                 <div *ngIf="f?.model?.errors?.required">Model is required</div>
             </div>
         </div>
-
         <div class="form-group col">
             <label for="plate">
                 Plate
@@ -229,7 +85,6 @@
                 <div *ngIf="f?.plate?.errors?.required">Plate is required</div>
                 <div *ngIf="f?.plate?.errors?.minlength">Plate must 8 characters</div>
                 <div *ngIf="f?.plate?.errors?.maxlength">Plate must 8 characters</div>
-
             </div>
         </div>
     </div>
@@ -243,7 +98,6 @@
                 <div *ngIf="f?.matriculation?.errors?.required">Matriculation is required</div>
             </div>
         </div>
-
         <div class="form-group col">
             <label id="available-radio-Group-Label" for="available">Pick available</label>
             <mat-radio-group aria-labelledby="available-radio-Group-Label" formControlName="available"
@@ -258,7 +112,6 @@
                 <div *ngIf="f?.available?.errors?.required">Available is required</div>
             </div>
         </div>
-
     </div>
 
     <div class="form-row">
