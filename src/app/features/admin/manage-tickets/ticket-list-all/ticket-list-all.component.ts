@@ -8,6 +8,7 @@ import { TicketService } from 'src/app/core/services/ticket.service';
 import { Ticket } from 'src/app/model/ticket';
 import { User } from 'src/app/model/user';
 import { SelectionModel } from '@angular/cdk/collections';
+import { AlertService } from 'src/app/core/services/alert-service.service';
 
 
 @Component({
@@ -28,8 +29,9 @@ export class TicketListAllComponent implements OnInit {
 
   constructor(
     private userTicketService: TicketService,
-    private accountSerivce: AccountService
-    ) { }
+    private accountSerivce: AccountService,
+    private alertService: AlertService) { }
+
 
   displayedColumns: string[] = ['id', 'type', 'status', 'content', 'comment', 'options'];
   selection = new SelectionModel<Ticket>(true, []);
@@ -66,6 +68,9 @@ export class TicketListAllComponent implements OnInit {
       .pipe(first())
       .subscribe(() => this.userTicket = this.userTicket.filter((x: any) => x.id !== id));
     this.deleteRowDataTable();
+    this.alertService.warn('Ticket deleted successfully');
+
+    
   }
 
   private deleteRowDataTable() {

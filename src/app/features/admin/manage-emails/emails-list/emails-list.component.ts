@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 import { EmailFromContactService } from 'src/app/core/services/email-from-contact.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EmailFromContact } from 'src/app/model/emailFromContact';
+import { AlertService } from 'src/app/core/services/alert-service.service';
 
 @Component({
   selector: 'app-emails-list',
@@ -19,8 +20,10 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private emailsFCService: EmailFromContactService) {  }
-  displayedColumns: string[] = ['select', 'id', 'emailAddress', 'name2', 'comment', 'open'];
+  constructor(private emailsFCService: EmailFromContactService,
+    private alertService: AlertService) { }
+
+    displayedColumns: string[] = ['select', 'id', 'emailAddress', 'name2', 'comment', 'open'];
   selection = new SelectionModel<EmailFromContact>(true, []);
 
 
@@ -54,6 +57,8 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
       .pipe(first())
       .subscribe(() => this.emailsFC = this.emailsFC.filter((x: any) => x.id !== id));
     this.deleteRowDataTable();
+    this.alertService.warn('Email from "Contact us" deleted successfully', { keepAfterRouteChange: true });
+
   }
 
   private deleteRowDataTable() {

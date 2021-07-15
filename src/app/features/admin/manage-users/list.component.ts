@@ -1,12 +1,15 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account-service.service';
+import { AlertService } from 'src/app/core/services/alert-service.service';
 
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
     users = null as any;
 
-    constructor(private accountService: AccountService) { }
+    constructor(
+        private accountService: AccountService,
+        private alertService: AlertService) { }
 
     ngOnInit() {
         this.accountService.getAll()
@@ -20,5 +23,7 @@ export class ListComponent implements OnInit {
         this.accountService.delete(id)
             .pipe(first())
             .subscribe(() => this.users = this.users.filter((x: any) => x.id !== id));
+        this.alertService.warn('User deleted successfully');
+
     }
-} 
+}

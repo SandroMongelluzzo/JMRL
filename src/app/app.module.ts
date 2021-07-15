@@ -26,6 +26,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     NavbarComponent,
     FooterComponent,
     HomeComponent,
@@ -33,7 +34,6 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     LeasingComponent,
     ContactComponent,
     NotfoundComponent,
-    AlertComponent,
     AdminNavbarComponent,
     SandroneComponent,
   ],

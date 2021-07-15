@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs/operators';
+import { AlertService } from 'src/app/core/services/alert-service.service';
 import { VehicleTypeService } from 'src/app/core/services/vehicle-type.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class TypeVehicleListComponent implements OnInit {
   
   constructor(
     private vehicleTypeService: VehicleTypeService,    
-    ) { }
+    private alertService: AlertService) { }
+
 
   ngOnInit(): void {
 
@@ -35,6 +37,8 @@ export class TypeVehicleListComponent implements OnInit {
       .pipe(first())
       .subscribe(() => this.types = this.types.filter((x: any) => x.id !== id));
     this.deleteRowDataTable();
+    this.alertService.warn('Vehicle Type deleted successfully');
+
   }
 
   private deleteRowDataTable() {
