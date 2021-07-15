@@ -13,12 +13,10 @@ export class TypeVehicleListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'type', 'options'];
   types=null as any
   dataSource = null as any;
-
   
   constructor(
     private vehicleTypeService: VehicleTypeService,    
     private alertService: AlertService) { }
-
 
   ngOnInit(): void {
 
@@ -42,7 +40,7 @@ export class TypeVehicleListComponent implements OnInit {
 
   private deleteRowDataTable() {
     this.dataSource = null;
-    this.types = null;
+    this.types = [];
     setTimeout(() => {      
       this.ngOnInit();
     }, 500);

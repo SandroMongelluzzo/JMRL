@@ -42,7 +42,7 @@ export class ManufacturerVehicleListComponent implements OnInit {
 
   private deleteRowDataTable() {
     this.dataSource = null;
-    this.manufacturers = null;
+    this.manufacturers = [];
     setTimeout(() => {
       this.ngOnInit();
     }, 500);

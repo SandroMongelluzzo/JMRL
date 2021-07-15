@@ -63,7 +63,7 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
   private deleteRowDataTable() {
     this.dataSource.paginator = this.paginator;
     this.dataSource = null;
-    this.emailsFC = null;
+    this.emailsFC = [];
     setTimeout(() => {      
       this.ngOnInit();
     }, 500);

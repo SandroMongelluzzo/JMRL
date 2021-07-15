@@ -10,7 +10,6 @@ import { User } from 'src/app/model/user';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AlertService } from 'src/app/core/services/alert-service.service';
 
-
 @Component({
   selector: 'app-ticket-list-all',
   templateUrl: './ticket-list-all.component.html',
@@ -22,16 +21,13 @@ export class TicketListAllComponent implements OnInit {
   dataSource = null as any;
   user?: User;
 
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
 
   constructor(
     private userTicketService: TicketService,
     private accountSerivce: AccountService,
     private alertService: AlertService) { }
-
 
   displayedColumns: string[] = ['id', 'type', 'status', 'content', 'comment', 'options'];
   selection = new SelectionModel<Ticket>(true, []);
@@ -40,7 +36,6 @@ export class TicketListAllComponent implements OnInit {
   ngOnInit(): void {
 
     this.user = this.accountSerivce.userValue;
-
 
     this.userTicketService.getAll()
       .pipe(first())
@@ -74,10 +69,9 @@ export class TicketListAllComponent implements OnInit {
   private deleteRowDataTable() {
     this.dataSource.paginator = this.paginator;
     this.dataSource = null;
-    this.userTicket = null;
+    this.userTicket = [];
     setTimeout(() => {
       this.ngOnInit();
     }, 500);
   }
-
 }

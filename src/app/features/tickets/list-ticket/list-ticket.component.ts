@@ -9,7 +9,6 @@ import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account-service.service';
 import { User } from 'src/app/model/user';
 
-
 @Component({
   selector: 'app-list-ticket',
   templateUrl: './list-ticket.component.html',
@@ -19,11 +18,9 @@ export class ListTicketComponent implements OnInit {
   userTicket = null as any;
   dataSource = null as any;
   user?: User;
-
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
 
   constructor(
     private userTicketService: TicketService,
@@ -33,11 +30,8 @@ export class ListTicketComponent implements OnInit {
   displayedColumns: string[] = ['id', 'type', 'status', 'content', 'comment', 'options'];
   selection = new SelectionModel<Ticket>(true, []);
 
-
   ngOnInit(): void {
-
     this.user = this.accountSerivce.userValue;
-
 
     this.userTicketService.getAll()
     .pipe(first())
@@ -57,19 +51,4 @@ export class ListTicketComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
- /* deleteUserTicket(id: number) {
-    const userticket = this.userTicket.find((x: any) => x.id === id);
-    userticket.isDeleting = true;
-    this.userTicketService.delete(id)
-      .pipe(first())
-      .subscribe(() => this.userTicket = this.userTicket.filter((x: any) => x.id !== id));
-    this.deleteRowDataTable();
-  }
-
-  private deleteRowDataTable() {
-    this.dataSource.paginator = this.paginator;
-    window.location.reload();
-  }*/
-
 }

@@ -1,16 +1,20 @@
 table {
-    width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
-  .id{
-    width: 1%;
+  width: 100%;
+}
 
-  }
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.id {
+  width: 1%;
+}
+
+.mat-row:nth-child(even) {
+  background-color: lightgrey;
+}
