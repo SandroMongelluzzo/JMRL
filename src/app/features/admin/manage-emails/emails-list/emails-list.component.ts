@@ -23,7 +23,7 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
   constructor(private emailsFCService: EmailFromContactService,
     private alertService: AlertService) { }
 
-    displayedColumns: string[] = ['select', 'id', 'emailAddress', 'name2', 'comment', 'open'];
+  displayedColumns: string[] = ['select', 'id', 'emailAddress', 'name2', 'comment', 'open'];
   selection = new SelectionModel<EmailFromContact>(true, []);
 
 
@@ -58,12 +58,15 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
       .subscribe(() => this.emailsFC = this.emailsFC.filter((x: any) => x.id !== id));
     this.deleteRowDataTable();
     this.alertService.warn('Email from "Contact us" deleted successfully', { keepAfterRouteChange: true });
-
   }
 
   private deleteRowDataTable() {
     this.dataSource.paginator = this.paginator;
-    window.location.reload();
+    this.dataSource = null;
+    this.emailsFC = null;
+    setTimeout(() => {      
+      this.ngOnInit();
+    }, 500);
   }
 
   //
@@ -73,8 +76,8 @@ export class EmailsListComponent implements OnInit, AfterViewInit {
     return numSelected === numRows;
   }
 
-  deleteSelected(){   
-   this.selection.selected.forEach(element => this.deleteEmailfc(element.id));
+  deleteSelected() {
+    this.selection.selected.forEach(element => this.deleteEmailfc(element.id));
   }
 
   masterToggle() {

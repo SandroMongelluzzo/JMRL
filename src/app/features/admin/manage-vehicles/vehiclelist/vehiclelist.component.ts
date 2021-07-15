@@ -18,8 +18,8 @@ export class VehiclelistComponent implements OnInit {
 
   ngOnInit(): void {
     this.vehicleService.getAll()
-            .pipe(first())
-            .subscribe(vehicles => this.vehiclesMain = vehicles);
+      .pipe(first())
+      .subscribe(vehicles => this.vehiclesMain = vehicles);
   }
 
   deleteVehicle(id: string) {
@@ -28,8 +28,7 @@ export class VehiclelistComponent implements OnInit {
     this.vehicleService.delete(id)
       .pipe(first())
       .subscribe(() => this.vehiclesMain = this.vehiclesMain.filter((x: any) => x.id !== id));
-      this.alertService.warn('Vehicle deleted successfully');
-
+    this.alertService.warn('Vehicle deleted successfully');
   }
- 
+
 }

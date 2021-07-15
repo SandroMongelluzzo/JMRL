@@ -11,12 +11,12 @@ import { VehicleManufacturerService } from 'src/app/core/services/vehicle-manufa
 })
 export class ManufacturerVehicleListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'options'];
-  manufacturers=null as any
+  manufacturers = null as any
   dataSource = null as any;
 
-  
+
   constructor(
-    private vehicleManufacturerService: VehicleManufacturerService,    
+    private vehicleManufacturerService: VehicleManufacturerService,
     private alertService: AlertService) { }
 
 
@@ -24,10 +24,10 @@ export class ManufacturerVehicleListComponent implements OnInit {
 
     this.vehicleManufacturerService.getAll()
       .pipe(first())
-      .subscribe(manufacturer =>        { 
+      .subscribe(manufacturer => {
         this.manufacturers = manufacturer
-        this.dataSource =  new MatTableDataSource(this.manufacturers)
-        });
+        this.dataSource = new MatTableDataSource(this.manufacturers)
+      });
   }
 
   deleteManufacturerVehicle(id: string) {
@@ -37,11 +37,14 @@ export class ManufacturerVehicleListComponent implements OnInit {
       .pipe(first())
       .subscribe(() => this.manufacturers = this.manufacturers.filter((x: any) => x.id !== id));
     this.deleteRowDataTable();
-    this.alertService.warn('Vehicle Manufacturer deleted successfully');
-
+    this.alertService.warn('Vehicle Manufacturer deleted successfully', { keepAfterRouteChange: true });
   }
 
   private deleteRowDataTable() {
-    window.location.reload();
+    this.dataSource = null;
+    this.manufacturers = null;
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 500);
   }
 }

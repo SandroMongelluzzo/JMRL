@@ -37,11 +37,14 @@ export class TypeVehicleListComponent implements OnInit {
       .pipe(first())
       .subscribe(() => this.types = this.types.filter((x: any) => x.id !== id));
     this.deleteRowDataTable();
-    this.alertService.warn('Vehicle Type deleted successfully');
-
+    this.alertService.warn('Vehicle Type deleted successfully', { keepAfterRouteChange: true });
   }
 
   private deleteRowDataTable() {
-    window.location.reload();
+    this.dataSource = null;
+    this.types = null;
+    setTimeout(() => {      
+      this.ngOnInit();
+    }, 500);
   }
 }

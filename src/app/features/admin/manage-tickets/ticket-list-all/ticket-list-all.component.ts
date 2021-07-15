@@ -22,7 +22,7 @@ export class TicketListAllComponent implements OnInit {
   dataSource = null as any;
   user?: User;
 
-  
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -43,13 +43,13 @@ export class TicketListAllComponent implements OnInit {
 
 
     this.userTicketService.getAll()
-    .pipe(first())
-    .subscribe(tickets => {
-      this.userTicket = tickets //.filter(ele => ele.userId==this.user?.id)
-      this.dataSource = new MatTableDataSource(this.userTicket);
-      setTimeout(() => this.dataSource.paginator = this.paginator);
-      setTimeout(() => this.dataSource.sort = this.sort);
-    });
+      .pipe(first())
+      .subscribe(tickets => {
+        this.userTicket = tickets //.filter(ele => ele.userId==this.user?.id)
+        this.dataSource = new MatTableDataSource(this.userTicket);
+        setTimeout(() => this.dataSource.paginator = this.paginator);
+        setTimeout(() => this.dataSource.sort = this.sort);
+      });
   }
 
   applyFilter(event: Event) {
@@ -68,14 +68,16 @@ export class TicketListAllComponent implements OnInit {
       .pipe(first())
       .subscribe(() => this.userTicket = this.userTicket.filter((x: any) => x.id !== id));
     this.deleteRowDataTable();
-    this.alertService.warn('Ticket deleted successfully');
-
-    
+    this.alertService.warn('Ticket deleted successfully', { keepAfterRouteChange: true });
   }
 
   private deleteRowDataTable() {
     this.dataSource.paginator = this.paginator;
-    window.location.reload();
+    this.dataSource = null;
+    this.userTicket = null;
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 500);
   }
 
 }
