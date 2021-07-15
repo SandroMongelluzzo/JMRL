@@ -14,6 +14,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 
@@ -39,6 +41,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatFormFieldModule,
     MatAutocompleteModule,
     MatRadioModule,
+    MatSelectModule,
     ]
 })
 export class VehiclesModule { }

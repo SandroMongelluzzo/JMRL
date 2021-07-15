@@ -1,5 +1,5 @@
 export interface VehicleManufacturer{
     id: string,
-    type: string,
+    name: string,
     imageUrl: string
 }

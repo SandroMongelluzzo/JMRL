@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { MatOption } from '@angular/material/core';
 import { VehicleType } from 'src/app/model/vehicleType';
 import { VehicleTypeService } from 'src/app/core/services/vehicle-type.service';
+import { VehicleManufacturerService } from 'src/app/core/services/vehicle-manufacturer.service';
+import { VehicleManufacturer } from 'src/app/model/vehicleManufacturer';
 
 
 
@@ -23,11 +25,21 @@ export class VehicleeditComponent implements OnInit {
   checked = null as any;
 
   //
-  myControl = new FormControl();
-  options?: VehicleType[];
-  loadedType = null as any;
+  myControlType = new FormControl();
+  myControlManufacturer = new FormControl();
 
-  filteredOptions?: Observable<VehicleType[]>;
+  optionsTypes?: VehicleType[];
+  optionsManufacturers?: VehicleManufacturer[];
+
+  loadedType = null as any;
+  loadedManufacturer = null as any;
+
+  typeSelected_autocomplete?:VehicleType;
+  manufacturerSelected_autocomplete?:VehicleManufacturer;
+
+  filteredOptionsType?: Observable<VehicleType[]>;
+  filteredOptionsManufacturer?: Observable<VehicleManufacturer[]>;
+
   //
   form?: FormGroup;
   id?: string;
@@ -35,12 +47,18 @@ export class VehicleeditComponent implements OnInit {
   loading = false;
   submitted = false;
 
+  //
+  hideTypeId = true;
+  hideManufacturerId = true;
+
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private vehicleService: VehicleService,
     private vehicleTypeService: VehicleTypeService,
+    private vehicleManufacturerService: VehicleManufacturerService,
     private alertService: AlertService
   ) {
   }
@@ -49,18 +67,20 @@ export class VehicleeditComponent implements OnInit {
 
     this.vehicleTypeService.getAll()
       .pipe(first())
-      .subscribe(vehicles2 => this.options = vehicles2);
+      .subscribe(type => this.optionsTypes = type);
 
-    /* for (var i = 0; i < this.options!.length; i++) {
-      console.log(JSON.stringify(this.options![i].type))
-    }*/
+    this.vehicleManufacturerService.getAll()
+      .pipe(first())
+      .subscribe(manufacturer => this.optionsManufacturers = manufacturer);
 
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
 
     this.form = this.formBuilder.group({
       type: ['', Validators.required],
+      typeId: ['', Validators.required],
       manufacturer: ['', Validators.required],
+      manufacturerId: ['', Validators.required],
       model: ['', Validators.required],
       plate: ['', Validators.required],
       matriculation: ['', Validators.required],
@@ -74,21 +94,27 @@ export class VehicleeditComponent implements OnInit {
         .subscribe(x => {
           this.form?.patchValue(x)
           this.loadedType = x.type;
+          this.loadedManufacturer = x.manufacturer
           this.availability = x.available.toString();
           this.checked = this.availability;
-        }
-        );
+        });
     }
 
-    //
-    setTimeout(() => {
-      this.filteredOptions = this.myControl.valueChanges
+    setTimeout(() => { //caricamento Vehicle Types
+      this.filteredOptionsType = this.myControlType.valueChanges
         .pipe(
           startWith(''),
-          map(value => typeof value === 'string' ? value : value.type),
-          map(type => type ? this._filter(type) : this.options!.slice())
-          //map(value => this._filter(value))
-          //map(value => value ? this._filter(value) : this.options!.slice())
+          map(valueType => typeof valueType === 'string' ? valueType : valueType.type),
+          map(type => type ? this._filterType(type) : this.optionsTypes!.slice())
+        );
+    }, 500);
+
+    setTimeout(() => { // caricamento vehicle manufacturer
+      this.filteredOptionsManufacturer = this.myControlManufacturer.valueChanges
+        .pipe(
+          startWith(''),
+          map(valueManufacturer => typeof valueManufacturer === 'string' ? valueManufacturer : valueManufacturer.manufacturer),
+          map(manufacturer => manufacturer ? this._filterManufacturer(manufacturer) : this.optionsManufacturers!.slice())
         );
     }, 500);
   }
@@ -96,11 +122,14 @@ export class VehicleeditComponent implements OnInit {
   get f() { return this.form?.controls; }
 
   onSubmit() {
-    this.submitted = true;
     
+    this.submitted = true;
+
     this.alertService.clear();
 
     if (this.form?.invalid) {
+      console.log(this.form)
+      console.log('Something is invalid')
       return;
     }
 
@@ -113,8 +142,10 @@ export class VehicleeditComponent implements OnInit {
   }
 
   private createVehicle() {
-    console.log(this.form?.value)
-    this.form!.value.type = this.form!.value.type.type.trim();
+
+    this.form!.value.type = this.typeSelected_autocomplete?.type;
+    this.form!.value.manufacturer = this.manufacturerSelected_autocomplete?.name;
+
     this.vehicleService.register(this.form?.value)
       .pipe(first())
       .subscribe({
@@ -130,7 +161,10 @@ export class VehicleeditComponent implements OnInit {
   }
 
   private updateVehicle() {
-    this.form!.value.type = this.form!.value.type.type//.trim();
+
+    this.form!.value.type = this.form!.value.type.type;
+    this.form!.value.manufacturer = this.form!.value.manufacturer.name;
+
     this.vehicleService.update(this.id!, this.form?.value)
       .pipe(first())
       .subscribe({
@@ -145,21 +179,44 @@ export class VehicleeditComponent implements OnInit {
         }
       });
   }
-  //
-  displayFn(vehicle: VehicleType): string {
-    //console.log(vehicle.type);
-    //return vehicle.type;
+
+  displayFnType(vehicle: VehicleType): string {
     return vehicle && vehicle.type ? vehicle.type : '';
   }
 
-  private _filter(type: string): VehicleType[] {
-    const filterValue = type.toLowerCase();
+  displayFnManufacturer(vehicle: VehicleManufacturer): string {
+    return vehicle && vehicle.name ? vehicle.name : '';
+  }
 
-    return this.options!.filter((option: { type: string; }) => option.type.toLowerCase().includes(filterValue));
+  private _filterType(type: string): VehicleType[] {
+    const filterValueType = type.toLowerCase();
+    return this.optionsTypes!.filter((option: { type: string; }) => option.type.toLowerCase().includes(filterValueType));
+  }
+
+  private _filterManufacturer(manufacturer: string): VehicleManufacturer[] {
+    const filterValueManufacturer = manufacturer.toLowerCase();
+    return this.optionsManufacturers!.filter((option: { name: string; }) => option.name.toLowerCase().includes(filterValueManufacturer));
   }
 
   OnTypeSelected(option: MatOption) {
-    return option.value.type
+    this.typeSelected_autocomplete = option.value
+    return option.value.type;
   }
 
+  OnManufacturerSelected(option: MatOption) {
+    this.manufacturerSelected_autocomplete = option.value
+    return option.value.name;
+  }
+
+  ShowTypeId() {
+    this.form!.value.typeId = this.typeSelected_autocomplete?.id;
+    this.form?.controls.typeId.setValue(this.typeSelected_autocomplete?.id);
+    this.hideTypeId = false;
+  }
+
+  ShowManufacturerId() {
+    this.form!.value.manufacturerId = this.manufacturerSelected_autocomplete?.id;
+    this.form?.controls.manufacturerId.setValue(this.manufacturerSelected_autocomplete?.id);
+    this.hideManufacturerId = false;
+  }
 }

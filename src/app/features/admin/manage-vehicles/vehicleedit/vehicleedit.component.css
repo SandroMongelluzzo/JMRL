@@ -1,6 +1,9 @@
 .vehicleType-matFormField{
     width: 100%;
 }
+.vehicleManufacturer-matFormField{
+    width: 50%;
+}
 .available-radioGroupLabe{
 padding-left: 10px;
 }
