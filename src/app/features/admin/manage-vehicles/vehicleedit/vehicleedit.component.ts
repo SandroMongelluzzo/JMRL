@@ -20,6 +20,8 @@ import { VehicleManufacturer } from 'src/app/model/vehicleManufacturer';
 })
 export class VehicleeditComponent implements OnInit {
 
+  iUrl = null as any;
+
   availability!: string;
   availables: string[] = ['true', 'false'];
   checked = null as any;
@@ -94,7 +96,8 @@ export class VehicleeditComponent implements OnInit {
         .subscribe(x => {
           this.form?.patchValue(x)
           this.loadedType = x.type;
-          this.loadedManufacturer = x.manufacturer
+          this.loadedManufacturer = x.manufacturer;
+          this.iUrl = x.imageUrl;
           this.availability = x.available.toString();
           this.checked = this.availability;
         });
