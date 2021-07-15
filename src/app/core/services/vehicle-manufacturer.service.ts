@@ -49,7 +49,7 @@ export class VehicleManufacturerService {
       }));
   }
 
-  delete(id: string) { //dovrebbe funzionare
+  delete(id: string) { 
     return this.http.delete(`${environment.apiUrl}/vehicleManufacturers/${id}`)
       .pipe(map(x => x));
   };

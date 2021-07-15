@@ -49,7 +49,7 @@ export class TicketService {
       }));
   }
 
-  delete(id: number) { //dovrebbe funzionare
+  delete(id: number) {
     return this.http.delete(`${environment.apiUrl}/tickets/${id}`)
       .pipe(map(x => x));
   };

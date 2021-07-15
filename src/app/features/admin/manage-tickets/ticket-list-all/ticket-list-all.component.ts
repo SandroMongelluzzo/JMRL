@@ -40,7 +40,7 @@ export class TicketListAllComponent implements OnInit {
     this.userTicketService.getAll()
       .pipe(first())
       .subscribe(tickets => {
-        this.userTicket = tickets //.filter(ele => ele.userId==this.user?.id)
+        this.userTicket = tickets;
         this.dataSource = new MatTableDataSource(this.userTicket);
         setTimeout(() => this.dataSource.paginator = this.paginator);
         setTimeout(() => this.dataSource.sort = this.sort);

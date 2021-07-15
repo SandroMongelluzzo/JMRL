@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class EmailFromContactService {
-  //emailFC -> email From Contact
 
   private emailFCSubject: BehaviorSubject<EmailFromContact>;
   public emailFCeMain: Observable<EmailFromContact>;

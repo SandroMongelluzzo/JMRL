@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 })
 export class VehicleService {
 
-
   private vehicleSubject: BehaviorSubject<Vehicle>;
   public vehicleMain: Observable<Vehicle>;
   data?: Vehicle;
@@ -52,7 +51,7 @@ export class VehicleService {
       }));
   }
 
-  delete(id: string) { //dovrebbe funzionare
+  delete(id: string) {
     return this.http.delete(`${environment.apiUrl}/vehicles/${id}`)
       .pipe(map(x => x));
   };
