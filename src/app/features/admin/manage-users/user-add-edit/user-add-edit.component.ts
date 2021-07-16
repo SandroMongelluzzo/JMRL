@@ -7,8 +7,8 @@ import { AlertService } from 'src/app/core/services/alert-service.service';
 
 
 
-@Component({ templateUrl: 'add-edit.component.html' })
-export class AddEditComponent implements OnInit {
+@Component({ templateUrl: 'user-add-edit.component.html' })
+export class UserAddEditComponent implements OnInit {
     form?: FormGroup;
     id?: number;
     isAddMode?: boolean;

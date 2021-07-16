@@ -1,5 +1,5 @@
 <form>
-  <h1>Vehicles</h1>
+  <h1>Manage Vehicles</h1>
   <a routerLink="add" class="btn btn-sm btn-success mb-2">Add Vehicle</a>
   <table class="table table-striped">
 
@@ -23,8 +23,6 @@
         <td>{{vehicle.available}}</td>
         <td>
 
-
-
         <td style="white-space: nowrap">
           <a routerLink="edit/{{vehicle.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
           <button (click)="deleteVehicle(vehicle.id)" class="btn btn-sm btn-danger btn-delete-vehicle"
@@ -44,7 +42,7 @@
 </form>
 <form>
 
-
+<hr>
   <div>
     <h5>DA FARE:</h5>
     <ul>

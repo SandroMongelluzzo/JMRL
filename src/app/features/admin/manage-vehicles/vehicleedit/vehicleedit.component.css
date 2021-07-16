@@ -1,12 +1,23 @@
-.vehicleType-matFormField{
+.vehicleType-matFormField {
     width: 100%;
 }
-.vehicleManufacturer-matFormField{
+
+.vehicleManufacturer-matFormField {
     width: 50%;
 }
-.available-radioGroupLabe{
-padding-left: 10px;
+
+.available-radioGroupLabe {
+    padding-left: 10px;
 }
-img{
+
+img {
     width: 100%;
+}
+
+.matriculationDatePicker {
+    width: 100%;
+}
+
+.datepicker-toggler{
+    color: #FF4081;
 }

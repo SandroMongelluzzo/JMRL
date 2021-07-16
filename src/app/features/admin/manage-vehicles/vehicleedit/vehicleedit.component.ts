@@ -36,8 +36,8 @@ export class VehicleeditComponent implements OnInit {
   loadedType = null as any;
   loadedManufacturer = null as any;
 
-  typeSelected_autocomplete?:VehicleType;
-  manufacturerSelected_autocomplete?:VehicleManufacturer;
+  typeSelected_autocomplete?: VehicleType;
+  manufacturerSelected_autocomplete?: VehicleManufacturer;
 
   filteredOptionsType?: Observable<VehicleType[]>;
   filteredOptionsManufacturer?: Observable<VehicleManufacturer[]>;
@@ -53,6 +53,9 @@ export class VehicleeditComponent implements OnInit {
   hideTypeId = true;
   hideManufacturerId = true;
 
+  //datepicker test
+  minDate: Date;
+  maxDate: Date;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,6 +66,12 @@ export class VehicleeditComponent implements OnInit {
     private vehicleManufacturerService: VehicleManufacturerService,
     private alertService: AlertService
   ) {
+    //datepicker test
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const currentDate = new Date().getDate();
+    this.minDate = new Date(currentYear - 20, 0, 1);
+    this.maxDate = new Date(currentYear, currentMonth, currentDate);
   }
 
   ngOnInit(): void {
@@ -125,7 +134,7 @@ export class VehicleeditComponent implements OnInit {
   get f() { return this.form?.controls; }
 
   onSubmit() {
-    
+
     this.submitted = true;
 
     this.alertService.clear();
@@ -136,6 +145,13 @@ export class VehicleeditComponent implements OnInit {
       return;
     }
 
+    if (!this.plateFormatCheck(this.form?.value.plate)) {
+      this.alertService.error('Plate Format Invalid: Must be CCNNNCC (N number, C char)');
+      return;
+    }
+
+    this.prepareFormValues();
+
     this.loading = true;
     if (this.isAddMode) {
       this.createVehicle();
@@ -145,10 +161,6 @@ export class VehicleeditComponent implements OnInit {
   }
 
   private createVehicle() {
-
-    this.form!.value.type = this.typeSelected_autocomplete?.type;
-    this.form!.value.manufacturer = this.manufacturerSelected_autocomplete?.name;
-
     this.vehicleService.register(this.form?.value)
       .pipe(first())
       .subscribe({
@@ -164,10 +176,6 @@ export class VehicleeditComponent implements OnInit {
   }
 
   private updateVehicle() {
-
-    this.form!.value.type = this.form!.value.type.type;
-    this.form!.value.manufacturer = this.form!.value.manufacturer.name;
-
     this.vehicleService.update(this.id!, this.form?.value)
       .pipe(first())
       .subscribe({
@@ -222,4 +230,16 @@ export class VehicleeditComponent implements OnInit {
     this.form?.controls.manufacturerId.setValue(this.manufacturerSelected_autocomplete?.id);
     this.hideManufacturerId = false;
   }
+
+  plateFormatCheck(plate: string) {
+    const plateRegExp = /^[A-Za-z]{1,2}[0-9]{1,4}[A-Za-z]{1,2}$/
+    return plateRegExp.test(plate);
+  }
+
+  prepareFormValues() {
+    this.form!.value.type = this.typeSelected_autocomplete?.type;
+    this.form!.value.manufacturer = this.manufacturerSelected_autocomplete?.name;
+    this.form!.value.plate = this.form!.value.plate.toUpperCase();
+  }
 }
+

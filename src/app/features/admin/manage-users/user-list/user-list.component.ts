@@ -3,8 +3,8 @@ import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account-service.service';
 import { AlertService } from 'src/app/core/services/alert-service.service';
 
-@Component({ templateUrl: 'list.component.html' })
-export class ListComponent implements OnInit {
+@Component({ templateUrl: 'user-list.component.html' })
+export class UserListComponent implements OnInit {
     users = null as any;
 
     constructor(

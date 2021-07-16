@@ -77,29 +77,35 @@
         <div class="form-group col">
             <label for="plate">
                 Plate
-                <em *ngIf="!isAddMode">(Leave blank to keep the same Plate)</em>
+                <em>(CCNNNCC<em *ngIf="!isAddMode"> - Leave blank to keep the same Plate</em>)</em>
             </label>
             <input type="plate" formControlName="plate" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f?.plate?.errors }" />
             <div *ngIf="submitted && f?.plate?.errors" class="invalid-feedback">
                 <div *ngIf="f?.plate?.errors?.required">Plate is required</div>
-                <div *ngIf="f?.plate?.errors?.minlength">Plate must 8 characters</div>
-                <div *ngIf="f?.plate?.errors?.maxlength">Plate must 8 characters</div>
+                <div *ngIf="f?.plate?.errors?.minlength || f?.plate?.errors?.maxlength ">
+                    Plate must be 7 characters long
+                </div>
             </div>
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col">
-            <label for="matriculation">Matriculation</label>
-            <input type="text" formControlName="matriculation" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.matriculation?.errors }" />
-            <div *ngIf="submitted && f?.matriculation?.errors" class="invalid-feedback">
-                <div *ngIf="f?.matriculation?.errors?.required">Matriculation is required</div>
-            </div>
+            <mat-form-field class="matriculationDatePicker" appearance="outline" color="accent">
+                <mat-label for="matriculation">Matriculation Date</mat-label>
+                <input type="text" formControlName="matriculation" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f?.matriculation?.errors }" matInput [min]="minDate"
+                    [max]="maxDate" [matDatepicker]="picker" readonly />
+                <div *ngIf="submitted && f?.matriculation?.errors" class="invalid-feedback">
+                    <div *ngIf="f?.matriculation?.errors?.required">Matriculation is required</div>
+                </div>
+                <mat-datepicker-toggle class="datepicker-toggler" matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker readonly="false"></mat-datepicker>
+            </mat-form-field>
         </div>
         <div class="form-group col">
-            <label id="available-radio-Group-Label" for="available">Pick available</label>
+            <mat-label id="available-radio-Group-Label" for="available">Pick available</mat-label>
             <mat-radio-group aria-labelledby="available-radio-Group-Label" formControlName="available"
                 class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.available?.errors }">
                 <mat-radio-button class="example-radio-button" class="available-radioGroupLabe"
@@ -124,7 +130,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="form-row">
         <div class="form-group col">
             <img [src]="iUrl">
@@ -140,11 +146,10 @@
     </div>
 </form>
 
+<hr>
 <div>
     <h5>DA FARE:</h5>
     <ul>
-        <li> CONTROLLO FORMATO TARGA "NN CCC NNN" DOVE N NUMERO C CHAR</li>
-        <li> MATRICULATION CON DATEPICKER</li>
         <li> IMG CON UPLOAD</li>
     </ul>
 </div>
