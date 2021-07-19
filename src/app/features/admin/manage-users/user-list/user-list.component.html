@@ -1,35 +1,58 @@
 ﻿<h1>Manage Users</h1>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Add User</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th style="width: 30%">First Name</th>
-            <th style="width: 30%">Last Name</th>
-            <th style="width: 30%">Username</th>
-            <th style="width: 10%"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let user of users">
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
-            <td>{{user.username}}</td>
-            <td style="white-space: nowrap">
-                <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-                <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
-                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
-                    <span *ngIf="!user.isDeleting">Delete</span>
-                </button>
-            </td>
-        </tr>
-        <tr *ngIf="!users">
-            <td colspan="4" class="text-center">
-                <span class="spinner-border spinner-border-lg align-center"></span>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Vehicle</a>
 
-<p>DA IMPLEMENTARE:</p>
-<p>- AGGIUNGERE SEARCHBAR</p>
-<p>- AGIGIUNGERE COLONNE SORTABLE</p>
+
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+      
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="id"> id </th>
+        <td mat-cell *matCellDef="let element" class="id"> {{element.id}} </td>
+      </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="firstName"> First Name </th>
+      <td mat-cell *matCellDef="let element" class="firstNameid"> {{element.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="lastName"> Last Name </th>
+      <td mat-cell *matCellDef="let element" class="lastName"> {{element.lastName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="username"> Username </th>
+      <td mat-cell *matCellDef="let element" class="username"> {{element.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="emailAddress">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="emailAddress"> Email Address </th>
+      <td mat-cell *matCellDef="let element" class="emailAddress"> {{element.emailAddress}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Options</th>
+      <td mat-cell *matCellDef="let element">
+        <a routerLink="edit/{{element.id}}" class="btn btn-sm btn-primary mr-1">Open</a>
+        <button (click)="deleteUser(element.id)" class="btn btn-sm btn-danger btn-delete-emailFC"
+          [disabled]="element.isDeleting">
+          <span *ngIf="element.isDeleting" class="spinner-border spinner-border-sm"></span>
+          <span *ngIf="!element.isDeleting">Delete</span>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

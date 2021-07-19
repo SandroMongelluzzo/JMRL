@@ -1,52 +1,59 @@
-<form>
-  <h1>Manage Vehicles</h1>
-  <a routerLink="add" class="btn btn-sm btn-success mb-2">Add Vehicle</a>
-  <table class="table table-striped">
+<h1>Manage Vehicles</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Vehicle</a>
 
-    <thead>
-      <tr>
-        <th style="width: 5%">ID</th>
-        <th style="width: 20%">Type</th>
-        <th style="width: 20%">Model</th>
-        <th style="width: 20%">Plate</th>
-        <th style="width: 20%">Available</th>
-        <th style="width: 5%"></th>
-      </tr>
-    </thead>
-    <tbody>
 
-      <tr *ngFor="let vehicle of vehiclesMain">
-        <td>{{ vehicle.id }}</td>
-        <td>{{vehicle.type}}</td>
-        <td>{{vehicle.model}}</td>
-        <td>{{vehicle.plate}}</td>
-        <td>{{vehicle.available}}</td>
-        <td>
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
 
-        <td style="white-space: nowrap">
-          <a routerLink="edit/{{vehicle.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-          <button (click)="deleteVehicle(vehicle.id)" class="btn btn-sm btn-danger btn-delete-vehicle"
-            [disabled]="vehicle.isDeleting">
-            <span *ngIf="vehicle.isDeleting" class="spinner-border spinner-border-sm"></span>
-            <span *ngIf="!vehicle.isDeleting">Delete</span>
-          </button>
-        </td>
-      </tr>
-      <tr *ngIf="!vehiclesMain">
-        <td colspan="4" class="text-center">
-          <span class="spinner-border spinner-border-lg align-center"></span>
-        </td>
-      </tr>
-    </tbody>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="id"> ID </th>
+      <td mat-cell *matCellDef="let element" class="id"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="type"> Type </th>
+      <td mat-cell *matCellDef="let element" class="type"> {{element.type}} </td>
+    </ng-container>
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="model"> Model </th>
+      <td mat-cell *matCellDef="let element" class="model"> {{element.model}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="plate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="plate"> Plate </th>
+      <td mat-cell *matCellDef="let element" class="plate"> {{element.plate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="available">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="available"> Avaliable </th>
+      <td mat-cell *matCellDef="let element" class="available"> {{element.available}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Options</th>
+      <td mat-cell *matCellDef="let element">
+        <a routerLink="edit/{{element.id}}" class="btn btn-sm btn-primary mr-1">Open</a>
+        <button (click)="deleteVehicle(element.id)" class="btn btn-sm btn-danger btn-delete-emailFC"
+          [disabled]="element.isDeleting">
+          <span *ngIf="element.isDeleting" class="spinner-border spinner-border-sm"></span>
+          <span *ngIf="!element.isDeleting">Delete</span>
+        </button>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
   </table>
-</form>
-<form>
 
-<hr>
-  <div>
-    <h5>DA FARE:</h5>
-    <ul>
-      <li> SEARCHBAR </li>
-      <li> COLONNE SORTABLE</li>
-    </ul>
-  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

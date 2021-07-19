@@ -20,5 +20,5 @@ td, th {
 }
 
 .mat-row:nth-child(even) {
-  background-color: lightgrey;
+  background-color: whitesmoke;
 }
