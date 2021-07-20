@@ -3,34 +3,17 @@
 
 <form [formGroup]="form!" (ngSubmit)="onSubmit()">
 
+
+
     <div class="form-row">
         <div class="form-group col">
             <label for="userId">User Id</label>
             <input type="text" formControlName="userId" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.userId?.errors }" readonly/>
+                [ngClass]="{ 'is-invalid': submitted && f?.userId?.errors }" readonly />
             <div *ngIf="submitted && f?.userId?.errors" class="invalid-feedback">
                 <div *ngIf="f?.userId?.errors?.required">User Id is required</div>
             </div>
         </div>
-        <div class="form-group col">
-            <label for="userEmail">User Email</label>
-            <input type="text" formControlName="userEmail" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.userEmail?.errors }" readonly/>
-            <div *ngIf="submitted && f?.userEmail?.errors" class="invalid-feedback">
-                <div *ngIf="f?.userEmail?.errors?.required">User Email is required</div>
-            </div>
-        </div>
-        <div class="form-group col">
-            <label for="userName">UserName</label>
-            <input type="text" formControlName="userName" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f?.userName?.errors }" readonly/>
-            <div *ngIf="submitted && f?.userName?.errors" class="invalid-feedback">
-                <div *ngIf="f?.userName?.errors?.required">UserName is required</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-row">
         <div class="form-group col">
             <label for="type">Type</label>
             <input type="text" formControlName="type" class="form-control"
@@ -39,6 +22,9 @@
                 <div *ngIf="f?.type?.errors?.required">Type is required</div>
             </div>
         </div>
+    </div>
+
+    <div class="form-row">
         <div class="form-group col">
             <label for="content">Content</label>
             <input type="text" formControlName="content" class="form-control"
@@ -57,7 +43,7 @@
             <div *ngIf="submitted && f?.comment?.errors" class="invalid-feedback">
                 <div *ngIf="f?.comment?.errors?.required">Comment is required</div>
             </div>
-        </div>     
+        </div>
     </div>
 
     <div class="form-row">
@@ -89,6 +75,17 @@
             </div>
         </div>
     </div>
+    <div class="form-row border 1px">
+        <div class="form-group col">
+            <label for="userEmail">User Info: Email</label>
+            <input type="text" class="form-control" [value]="ticketUserInfo?.emailAddress" readonly />
+        </div>
+        <div class="form-group col">
+            <label for="userName">& username</label>
+            <input type="text" class="form-control" [value]="ticketUserInfo?.username" readonly />
+        </div>
+    </div>
+
 
     <div class="form-group">
         <button [disabled]="loading" class="btn btn-primary">

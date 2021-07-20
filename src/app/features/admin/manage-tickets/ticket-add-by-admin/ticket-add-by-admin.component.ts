@@ -40,8 +40,6 @@ export class TicketAddByAdminComponent implements OnInit {
       type: ['', Validators.required],
       status: ['', Validators.required],
       userId: ['', Validators.required],
-      userEmail: ['', Validators.required],
-      userName: ['', Validators.required],
       content: ['', Validators.required],
       comment: ['', Validators.required],
       attachment: ['', Validators.required],
@@ -79,7 +77,7 @@ export class TicketAddByAdminComponent implements OnInit {
       .subscribe({
         next: () => {
           this.alertService.success('Ticket added successfully', { keepAfterRouteChange: true });
-          this.router.navigate(['../../'], { relativeTo: this.route });
+          this.router.navigate(['../'], { relativeTo: this.route });
         },
         error: error => {
           this.alertService.error(error);

@@ -40,8 +40,6 @@ export class ReadticketComponent implements OnInit {
       type: ['', Validators.required],
       status: ['',Validators.required],
       userId: [this.user.id, Validators.required],
-      userEmail: [this.user.emailAddress, Validators.required],
-      userName: [this.user.username, Validators.required],
       content: ['', Validators.required],
       comment: ['', Validators.required],
       attachment: ['', Validators.required],
@@ -59,7 +57,6 @@ export class ReadticketComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
    
     this.alertService.clear();
 

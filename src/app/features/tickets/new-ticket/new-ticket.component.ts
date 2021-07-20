@@ -39,8 +39,6 @@ export class NewTicketComponent implements OnInit {
       type: ['', Validators.required],
       status: ['Opened',Validators.required],
       userId: [this.user.id, Validators.required],
-      userEmail: [this.user.emailAddress, Validators.required],
-      userName: [this.user.username, Validators.required],
       content: ['', Validators.required],
       comment: ['', Validators.required],
       attachment: ['', Validators.required],

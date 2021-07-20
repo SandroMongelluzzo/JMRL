@@ -5,10 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/core/services/alert-service.service';
 import { VehicleService } from 'src/app/core/services/vehicle.service';
-import { Ticket } from 'src/app/model/ticket';
-import { SelectionModel } from '@angular/cdk/collections';
-
-
 
 @Component({
   selector: 'app-vehiclelist',
@@ -27,7 +23,6 @@ export class VehiclelistComponent implements OnInit {
     private alertService: AlertService) { }
 
   displayedColumns: string[] = ['id', 'type', 'model', 'plate', 'available', 'options'];
-  selection = new SelectionModel<Ticket>(true, []);
 
 
   ngOnInit(): void {

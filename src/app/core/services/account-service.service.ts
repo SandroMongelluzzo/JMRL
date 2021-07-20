@@ -57,6 +57,11 @@ export class AccountService {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
+    /*getValueById(id: number): User{
+       let uvbID = this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+       uvbID.pipe;
+    }*/
+
     update(id: number, params: any) {
         return this.http.put(`${environment.apiUrl}/users/${id}`, params)
             .pipe(map(x => {

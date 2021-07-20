@@ -5,9 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account-service.service';
 import { TicketService } from 'src/app/core/services/ticket.service';
-import { Ticket } from 'src/app/model/ticket';
 import { User } from 'src/app/model/user';
-import { SelectionModel } from '@angular/cdk/collections';
 import { AlertService } from 'src/app/core/services/alert-service.service';
 
 @Component({
@@ -30,7 +28,6 @@ export class TicketListAllComponent implements OnInit {
     private alertService: AlertService) { }
 
   displayedColumns: string[] = ['id', 'type', 'status', 'content', 'comment', 'options'];
-  selection = new SelectionModel<Ticket>(true, []);
 
 
   ngOnInit(): void {

@@ -19,7 +19,7 @@ export class TicketEditComponent implements OnInit {
   isAddMode?: boolean;
   loading = false;
   submitted = false;
-  user?: User;
+  ticketUserInfo?: User;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,14 +34,10 @@ export class TicketEditComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
 
-    this.user = this.accountSerivce.userValue;
-
     this.form = this.formBuilder.group({
       type: ['', Validators.required],
       status: ['', Validators.required],
       userId: ['', Validators.required],
-      userEmail: ['', Validators.required],
-      userName: ['', Validators.required],
       content: ['', Validators.required],
       comment: ['', Validators.required],
       attachment: ['', Validators.required],
@@ -51,15 +47,25 @@ export class TicketEditComponent implements OnInit {
     if (!this.isAddMode) {
       this.ticketService.getById(this.id!)
         .pipe(first())
-        .subscribe(x => this.form?.patchValue(x));
+        .subscribe(x => {
+          this.form?.patchValue(x)
+
+          this.accountSerivce.getById(x.userId).pipe(first())
+            .subscribe((y): User => {
+              return this.ticketUserInfo = y
+            });
+         /*setTimeout(() => {
+            console.log(this.ticketUserInfo)
+          }, 500);*/
+        });
     }
+
   }
 
   get f() { return this.form?.controls; }
 
   onSubmit() {
     this.submitted = true;
-
 
     this.alertService.clear();
 

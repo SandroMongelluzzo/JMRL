@@ -3,8 +3,6 @@ export interface Ticket{
     type: string,
     status: string,
     userId: number,
-    userEmail: string,
-    userName: string,
     content: string,
     comment: string,
     attachment: string,

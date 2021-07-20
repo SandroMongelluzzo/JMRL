@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { TicketService } from 'src/app/core/services/ticket.service';
-import { Ticket } from 'src/app/model/ticket';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account-service.service';
@@ -28,7 +26,6 @@ export class ListTicketComponent implements OnInit {
     ) { }
 
   displayedColumns: string[] = ['id', 'type', 'status', 'content', 'comment', 'options'];
-  selection = new SelectionModel<Ticket>(true, []);
 
   ngOnInit(): void {
     this.user = this.accountSerivce.userValue;
