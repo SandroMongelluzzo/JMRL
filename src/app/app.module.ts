@@ -19,7 +19,7 @@ import { ContactComponent } from './features/contact/contact.component';
 import { NotfoundComponent } from './core/components/notfound/notfound.component';
 import {  DecimalPipe } from '@angular/common';
 import { AdminNavbarComponent } from './core/components/admin-navbar/admin-navbar.component';
-import { SandroneComponent } from './shared/sandrone/sandrone.component';
+import { SandroneComponent } from './public/sandrone/sandrone.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 

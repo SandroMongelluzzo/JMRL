@@ -7,7 +7,7 @@ import { ContactComponent } from './features/contact/contact.component';
 import { HomeComponent } from './features/home/home.component';
 import { LeasingComponent } from './features/leasing/leasing.component';
 import { LogisticComponent } from './features/logistic/logistic.component';
-import { SandroneComponent } from './shared/sandrone/sandrone.component';
+import { SandroneComponent } from './public/sandrone/sandrone.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
