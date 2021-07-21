@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account-service.service';
@@ -10,9 +10,23 @@ import { User } from 'src/app/model/user';
 @Component({
   selector: 'app-new-ticket',
   templateUrl: './new-ticket.component.html',
-  styleUrls: ['./new-ticket.component.css']
+  styleUrls: ['./new-ticket.component.css'],
+  
 })
 export class NewTicketComponent implements OnInit {
+  /*/
+  issue = new FormControl('', [Validators.required]);
+
+  getErrorMessage() {
+    if (this.issue.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.issue.hasError('issue') ? 'Not a valid issue' : '';
+  }
+  /*/
+
+
   form?: FormGroup;
   id?: number;
   isAddMode?: boolean;
@@ -37,13 +51,13 @@ export class NewTicketComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       type: ['', Validators.required],
-      status: ['Opened',Validators.required],
+      status: ['Opened', Validators.required],
       userId: [this.user.id, Validators.required],
       content: ['', Validators.required],
       comment: ['', Validators.required],
       attachment: ['', Validators.required],
       employeeId: ['0', Validators.required],
-    }); 
+    });
 
     if (!this.isAddMode) {
       this.ticketService.getById(this.id!)
@@ -57,11 +71,11 @@ export class NewTicketComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-   
+
     this.alertService.clear();
 
     if (this.form?.invalid) {
-      console.log('ao')
+      console.log('form invalid')
       return;
     }
 
@@ -75,32 +89,32 @@ export class NewTicketComponent implements OnInit {
 
   private createTicket() {
     this.ticketService.register(this.form?.value)
-        .pipe(first())
-        .subscribe({
-            next: () => {
-                this.alertService.success('Ticket added successfully', { keepAfterRouteChange: true });
-                this.router.navigate(['../'], { relativeTo: this.route });
-            },
-            error: error => {
-                this.alertService.error(error);
-                this.loading = false;
-            }
-        });
-}
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Ticket added successfully', { keepAfterRouteChange: true });
+          this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
+  }
 
-private updateTicket() {
+  private updateTicket() {
     this.ticketService.update(this.id!, this.form?.value)
-        .pipe(first())
-        .subscribe({
-            next: () => {
-                this.alertService.success('Update successful', { keepAfterRouteChange: true });
-                this.router.navigate(['../'], { relativeTo: this.route });
-            },
-            error: error => {
-                this.alertService.error(error);
-                this.loading = false;
-            }
-        });
-}
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Update successful', { keepAfterRouteChange: true });
+          this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
+  }
 
 }
