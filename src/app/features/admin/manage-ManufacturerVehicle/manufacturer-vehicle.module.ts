@@ -24,11 +24,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     ManufacturerVehicleRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule,
     MatPaginatorModule,
     MatFormFieldModule,
     MatTableModule,

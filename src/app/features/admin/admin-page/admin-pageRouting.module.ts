@@ -11,6 +11,9 @@ const routes: Routes = [
       },
       {
         path: 'manageManufacturerVehicle', loadChildren: () => import('src/app/features/admin/manage-ManufacturerVehicle/manufacturer-vehicle.module').then(m => m.ManufacturerVehicleModule)
+      },
+      {
+        path: 'manageFaq', loadChildren: () => import('src/app/features/admin/manage-faq/manage-faq.module').then(m => m.ManageFaqModule)
       }
     ]
   }
