@@ -11,7 +11,7 @@ import { User } from 'src/app/model/user';
   selector: 'app-new-ticket',
   templateUrl: './new-ticket.component.html',
   styleUrls: ['./new-ticket.component.css'],
-  
+
 })
 export class NewTicketComponent implements OnInit {
   /*/
@@ -25,7 +25,6 @@ export class NewTicketComponent implements OnInit {
     return this.issue.hasError('issue') ? 'Not a valid issue' : '';
   }
   /*/
-
 
   form?: FormGroup;
   id?: number;
@@ -46,7 +45,6 @@ export class NewTicketComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
-
     this.user = this.accountSerivce.userValue;
 
     this.form = this.formBuilder.group({
@@ -70,8 +68,6 @@ export class NewTicketComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
-
     this.alertService.clear();
 
     if (this.form?.invalid) {
@@ -116,5 +112,4 @@ export class NewTicketComponent implements OnInit {
         }
       });
   }
-
 }
