@@ -40,7 +40,6 @@ export class FaqAddEditComponent implements OnInit {
         .pipe(first())
         .subscribe(x => {
           this.form?.patchValue(x)
-
         });
     }
   }
@@ -49,7 +48,6 @@ export class FaqAddEditComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     this.alertService.clear();
 
     if (this.form?.invalid) {
@@ -92,6 +90,5 @@ export class FaqAddEditComponent implements OnInit {
           this.loading = false;
         }
       });
-  }
-  
+  }  
 }

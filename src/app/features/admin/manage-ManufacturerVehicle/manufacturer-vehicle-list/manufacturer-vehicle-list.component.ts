@@ -14,11 +14,9 @@ export class ManufacturerVehicleListComponent implements OnInit {
   manufacturers = null as any
   dataSource = null as any;
 
-
   constructor(
     private vehicleManufacturerService: VehicleManufacturerService,
     private alertService: AlertService) { }
-
 
   ngOnInit(): void {
 
