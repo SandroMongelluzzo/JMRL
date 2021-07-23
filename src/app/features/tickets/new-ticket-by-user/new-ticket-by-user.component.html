@@ -14,8 +14,7 @@
                             <mat-form-field class="issue-formField" appearance="fill">
                                 <mat-label class="issue-label" for="issue">Enter your issue</mat-label>
                                 <textarea class="form-control" formControlName="issue" matInput [formControl]="issue"
-                                    required matInput (keyup)="applyFilter($event)"
-                                    #input> </textarea>
+                                    required matInput (keyup)="applyFilter($event)" #input> </textarea>
                                 <mat-error *ngIf="issue.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
                         </div>

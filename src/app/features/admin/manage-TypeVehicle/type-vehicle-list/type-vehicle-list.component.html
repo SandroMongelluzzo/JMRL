@@ -1,4 +1,5 @@
 <h3>Types</h3>
+<a routerLink="new" class="btn btn-success">New Type</a>
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="id">
@@ -26,8 +27,3 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-
-  
-
-<a routerLink="new" class="btn btn-success">New Type</a>
-
