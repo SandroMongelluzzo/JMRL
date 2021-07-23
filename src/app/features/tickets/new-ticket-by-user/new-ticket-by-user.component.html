@@ -1,0 +1,81 @@
+<main>
+    <header>
+        <h1>New Ticket</h1>
+    </header>
+
+    <body>
+        <section>
+
+            <form [formGroup]="form!" (ngSubmit)="onSubmit()">
+
+                <div class="form-row">
+                    <div class="form-group col">
+                        <div class="issue-container">
+                            <mat-form-field class="issue-formField" appearance="fill">
+                                <mat-label class="issue-label" for="issue">Enter your issue</mat-label>
+                                <textarea class="form-control" formControlName="issue" matInput [formControl]="issue"
+                                    required matInput (keyup)="applyFilter($event)"
+                                    #input> </textarea>
+                                <mat-error *ngIf="issue.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col">
+                        <mat-form-field class="errorCode-formField" appearance="fill">
+                            <mat-label class="errorCode-label" for="errorCode">Error Code - optional </mat-label>
+                            <input matInput placeholder="Example 'ER:14243'" value="" formControlName="errorCode"
+                                class="form-control">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col">
+                        <mat-label class="attachment-label" for="attachment">Attachment </mat-label>
+                        <button>Select File</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Save
+                    </button>
+                    <a routerLink="/tickets" class="btn btn-link">Cancel</a>
+                </div>
+            </form>
+        </section>
+
+        <aside>
+            <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" matSort>
+                <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+                    <th mat-header-cell *matHeaderCellDef> FAQ </th>
+                    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="expandedDetail">
+                    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                        <div class="faq-element-detail"
+                            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+                            <div class="faq-element-content">
+                                <span class="faq-element-content-attribution">Answer:</span>
+                                {{element.content}}
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="faq-element-row"
+                    [class.faq-expanded-row]="expandedElement === element"
+                    (click)="expandedElement = expandedElement === element ? null : element">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="faq-detail-row"></tr>
+            </table>
+        </aside>
+    </body>
+</main>

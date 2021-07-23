@@ -4,6 +4,7 @@ import { LayoutTicketComponent } from './layout-ticket/layout-ticket.component';
 import { NewTicketComponent } from './new-ticket/new-ticket.component';
 import { ListTicketComponent } from './list-ticket/list-ticket.component';
 import { ReadticketComponent } from './readticket/readticket.component';
+import { NewTicketByUserComponent } from './new-ticket-by-user/new-ticket-by-user.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ListTicketComponent },
       { path: 'add', component: NewTicketComponent },
+      { path: 'user/add', component: NewTicketByUserComponent },
       { path: 'read/:id', component: ReadticketComponent}
     ]
   }

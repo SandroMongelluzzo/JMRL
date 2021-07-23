@@ -1,0 +1,83 @@
+.issue-container .mat-form-field+.mat-form-field {
+  margin-left: 8px;
+}
+
+.issue-formField {
+  min-width: 100%;
+}
+
+.errorCode-formField {
+  min-width: 100%;
+}
+
+textarea {
+  min-height: 10em;
+}
+
+table {
+  width: 100%;
+}
+
+tr.faq-detail-row {
+  height: 0;
+  background-color: lightblue;
+}
+
+tr.faq-element-row:not(.faq-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.faq-element-row:not(.faq-expanded-row):active {
+  background: #efefef;
+}
+
+.faq-element-row td {
+  border-bottom-width: 0;
+}
+
+.faq-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.faq-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.faq-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.faq-element-description {
+  padding: 16px;
+}
+
+.faq-element-description-attribution {
+  opacity: 0.5;
+}
+
+main {
+  width: 100%;
+}
+
+aside {
+  float: right;
+  width: 30%;
+  padding-left: 10px;
+}
+
+body {
+  background-color: #f8f9fa;
+}
+
+section {
+  float: left;
+  width: 70%;
+}

@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ReadticketComponent } from './readticket/readticket.component';
+import { NewTicketByUserComponent } from './new-ticket-by-user/new-ticket-by-user.component';
 
 
 
@@ -21,7 +22,8 @@ import { ReadticketComponent } from './readticket/readticket.component';
     ListTicketComponent,
     NewTicketComponent,
     LayoutTicketComponent,
-    ReadticketComponent
+    ReadticketComponent,
+    NewTicketByUserComponent
   ],
   imports: [
     CommonModule,
