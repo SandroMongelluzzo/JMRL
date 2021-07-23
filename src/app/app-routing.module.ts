@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: 'sandrone', component: SandroneComponent },
   { path: 'logistic', component: LogisticComponent, canActivate: [AuthGuard] },
   { path: 'leasing', component: LeasingComponent, canActivate: [AuthGuard] },
-
   {
     path: 'users', loadChildren: () => import('src/app/features/admin/manage-users/users.module').then(m => m.UsersModule), canActivate: [AuthGuard, AdminGuard]
   },

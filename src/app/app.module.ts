@@ -46,8 +46,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    BrowserAnimationsModule,
-    
+    BrowserAnimationsModule,    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

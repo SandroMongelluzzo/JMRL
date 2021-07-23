@@ -14,6 +14,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ReadticketComponent } from './readticket/readticket.component';
 import { NewTicketByUserComponent } from './new-ticket-by-user/new-ticket-by-user.component';
+import { ReadTicketUserComponent } from './read-ticket-user/read-ticket-user.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NewTicketByUserComponent } from './new-ticket-by-user/new-ticket-by-use
     NewTicketComponent,
     LayoutTicketComponent,
     ReadticketComponent,
-    NewTicketByUserComponent
+    NewTicketByUserComponent,
+    ReadTicketUserComponent
   ],
   imports: [
     CommonModule,

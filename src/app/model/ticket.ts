@@ -10,3 +10,13 @@ export interface Ticket{
     createdAt: Date,
     updatedAt: Date
 }
+
+export interface Ticket2{
+    id: number,
+    issue: string,
+    errorCode: string,
+    status: string,
+    priority: string,
+    createdAt: Date,
+    updatedAt: Date
+}
