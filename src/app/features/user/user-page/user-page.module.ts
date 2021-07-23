@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { UserPageComponent } from './user-page.component';
 import { UserPageRoutingModule } from './user-page-routing.module';
 
-
-
 @NgModule({
   declarations: [
     UserPageComponent

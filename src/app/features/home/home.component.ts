@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { AccountService } from 'src/app/core/services/account-service.service';
 import { User } from 'src/app/model/user';
 
-
-
 @Component({
     selector: 'app-home',
     templateUrl: 'home.component.html',

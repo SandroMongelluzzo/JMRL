@@ -38,13 +38,13 @@ export class ReadticketComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       type: ['', Validators.required],
-      status: ['',Validators.required],
+      status: ['', Validators.required],
       userId: [this.user.id, Validators.required],
       content: ['', Validators.required],
       comment: ['', Validators.required],
       attachment: ['', Validators.required],
       employeeId: ['0', Validators.required],
-    }); 
+    });
 
     if (!this.isAddMode) {
       this.ticketService.getById(this.id!)
@@ -52,55 +52,8 @@ export class ReadticketComponent implements OnInit {
         .subscribe(x => this.form?.patchValue(x));
     }
   }
-
   get f() { return this.form?.controls; }
 
   onSubmit() {
-    this.submitted = true;
-   
-    this.alertService.clear();
-
-    if (this.form?.invalid) {
-      console.log('ao')
-      return;
-    }
-
-    this.loading = true;
-    if (this.isAddMode) {
-      this.createTicket();
-    } else {
-      this.updateTicket();
-    }
   }
-
-  private createTicket() {
-    this.ticketService.register(this.form?.value)
-        .pipe(first())
-        .subscribe({
-            next: () => {
-                this.alertService.success('Ticket added successfully', { keepAfterRouteChange: true });
-                this.router.navigate(['../'], { relativeTo: this.route });
-            },
-            error: error => {
-                this.alertService.error(error);
-                this.loading = false;
-            }
-        });
-}
-
-private updateTicket() {
-    this.ticketService.update(this.id!, this.form?.value)
-        .pipe(first())
-        .subscribe({
-            next: () => {
-                this.alertService.success('Update successful', { keepAfterRouteChange: true });
-                this.router.navigate(['../'], { relativeTo: this.route });
-            },
-            error: error => {
-                this.alertService.error(error);
-                this.loading = false;
-            }
-        });
-}
-
 }

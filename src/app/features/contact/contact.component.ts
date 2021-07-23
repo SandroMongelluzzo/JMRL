@@ -27,7 +27,6 @@ export class ContactComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
 
@@ -35,31 +34,25 @@ export class ContactComponent implements OnInit {
       emailAddress: new FormControl('', [Validators.compose([Validators.required, Validators.email])!]),
       name: new FormControl('', [Validators.required]),
       comment: new FormControl('', [Validators.required]),
-      attachmentURL:  new FormControl('', [Validators.required])
-
+      attachmentURL: new FormControl('', [Validators.required])
     });
   }
 
   get f() { return this.FormData?.controls; }
 
-
   onSubmit() {
     this.submitted = true;
-
-    // reset alerts on submit
     this.alertService.clear();
 
-    // stop here if form is invalid
     if (this.FormData?.invalid) {
-        return;
+      return;
     }
 
     this.loading = true;
     if (this.isAddMode) {
-        this.sendEmail();
-    } else {
+      this.sendEmail();
     }
-}
+  }
 
   private sendEmail() {
     this.emailService?.register(this.FormData?.value)

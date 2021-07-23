@@ -8,7 +8,6 @@ import { User } from 'src/app/model/user';
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit {
-
   user?: User;
 
   constructor(private accountService: AccountService) {

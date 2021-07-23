@@ -15,8 +15,6 @@ import { MatTableModule } from '@angular/material/table';
 import { ReadticketComponent } from './readticket/readticket.component';
 import { NewTicketByUserComponent } from './new-ticket-by-user/new-ticket-by-user.component';
 
-
-
 @NgModule({
   declarations: [
     ListTicketComponent,

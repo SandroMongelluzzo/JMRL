@@ -6,7 +6,6 @@ import { ListTicketComponent } from './list-ticket/list-ticket.component';
 import { ReadticketComponent } from './readticket/readticket.component';
 import { NewTicketByUserComponent } from './new-ticket-by-user/new-ticket-by-user.component';
 
-
 const routes: Routes = [
   {
     path: '', component: LayoutTicketComponent,
