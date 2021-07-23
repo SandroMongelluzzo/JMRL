@@ -4,8 +4,6 @@ import { FaqListComponent } from './faq-list/faq-list.component';
 import { FaqAddEditComponent } from './faq-add-edit/faq-add-edit.component';
 import { RouterModule, Routes } from '@angular/router';
 
-
-
 const routes: Routes = [
   {
     path: '', component: FaqLayoutComponent,
@@ -16,8 +14,6 @@ const routes: Routes = [
     ]
   }
 ]
-
-
 @NgModule({
   declarations: [],
   imports: [

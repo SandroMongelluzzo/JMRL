@@ -14,8 +14,6 @@ import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketAddByAdminComponent } from './ticket-add-by-admin/ticket-add-by-admin.component';
 
-
-
 @NgModule({
   declarations: [
     TicketLayoutComponent,
