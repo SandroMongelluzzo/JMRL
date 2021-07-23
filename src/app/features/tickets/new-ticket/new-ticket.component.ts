@@ -14,17 +14,6 @@ import { User } from 'src/app/model/user';
 
 })
 export class NewTicketComponent implements OnInit {
-  /*/
-  issue = new FormControl('', [Validators.required]);
-
-  getErrorMessage() {
-    if (this.issue.hasError('required')) {
-      return 'You must enter a value';
-    }
-
-    return this.issue.hasError('issue') ? 'Not a valid issue' : '';
-  }
-  /*/
 
   form?: FormGroup;
   id?: number;
