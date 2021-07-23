@@ -11,10 +11,7 @@ import { VehicleManufacturerService } from 'src/app/core/services/vehicle-manufa
   styleUrls: ['./manufacturer-vehicle-add-edit.component.css']
 })
 export class ManufacturerVehicleAddEditComponent implements OnInit {
-
-  iUrl = null as any;
-
-
+  imageUrl = null as any;
   form?: FormGroup;
   id?: string;
   isAddMode?: boolean;
@@ -43,8 +40,7 @@ export class ManufacturerVehicleAddEditComponent implements OnInit {
         .pipe(first())
         .subscribe(x => {
           this.form?.patchValue(x)
-          this.iUrl = x.imageUrl
-
+          this.imageUrl = x.imageUrl
         });
     }
   }
@@ -53,7 +49,6 @@ export class ManufacturerVehicleAddEditComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     this.alertService.clear();
 
     if (this.form?.invalid) {

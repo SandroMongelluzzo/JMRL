@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TicketService {
-
   private ticketSubject: BehaviorSubject<Ticket>;
   public ticketMain: Observable<Ticket>;
   data?: Ticket;

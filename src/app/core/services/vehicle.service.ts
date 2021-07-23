@@ -5,7 +5,6 @@ import { Vehicle } from 'src/app/model/vehicle';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-
 @Injectable({
   providedIn: 'root'
 })

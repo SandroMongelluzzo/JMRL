@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class VehicleManufacturerService {
-
   private vehicleManufacturerSubject: BehaviorSubject<VehicleManufacturer>;
   public vehicleManufacturerMain: Observable<VehicleManufacturer>;
   data?: VehicleManufacturer;
