@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class FaqService {
-
   private faqSubject: BehaviorSubject<Faq>;
   public faqMain: Observable<Faq>;
   data?: Faq;
@@ -49,7 +48,7 @@ export class FaqService {
       }));
   }
 
-  delete(id: number) { 
+  delete(id: number) {
     return this.http.delete(`${environment.apiUrl}/manageFaq/${id}`)
       .pipe(map(x => x));
   };
