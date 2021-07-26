@@ -5,11 +5,7 @@ import { ManufacturerVehicleListComponent } from './manufacturer-vehicle-list/ma
 import { ManufacturerVehicleLayoutComponent } from './manufacturer-vehicle-layout/manufacturer-vehicle-layout.component';
 import { ManufacturerVehicleRoutingModule } from './manufacturer-vehicle-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -25,12 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    MatPaginatorModule,
     MatFormFieldModule,
     MatTableModule,
-    MatInputModule,
-    MatSortModule,
-    MatCheckboxModule
   ]
 })
 export class ManufacturerVehicleModule { }
