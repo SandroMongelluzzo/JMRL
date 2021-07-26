@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountService } from '../services/account-service.service';
 
-
-
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
     constructor(private accountService: AccountService) { }
@@ -22,7 +20,6 @@ export class JwtInterceptor implements HttpInterceptor {
                 }
             });
         }
-
         return next.handle(request);
     }
 }
