@@ -12,7 +12,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EmailsEditComponent } from './emails-edit/emails-edit.component';
 
-
 @NgModule({
   declarations: [
     EmailsListComponent,
@@ -30,7 +29,6 @@ import { EmailsEditComponent } from './emails-edit/emails-edit.component';
     MatInputModule,
     MatSortModule,
     MatCheckboxModule
-
   ]
 })
 export class EmailsFCModule { }

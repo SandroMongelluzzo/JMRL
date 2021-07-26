@@ -4,8 +4,6 @@ import { VehicleeditComponent } from './vehicleedit/vehicleedit.component';
 import { VehiclelayoutComponent } from './vehiclelayout/vehiclelayout.component';
 import { VehiclelistComponent } from './vehiclelist/vehiclelist.component';
 
-
-
 const routes: Routes = [
     {
         path: '', component: VehiclelayoutComponent,
