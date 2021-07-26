@@ -14,6 +14,9 @@ const routes: Routes = [
       },
       {
         path: 'manageFaq', loadChildren: () => import('src/app/features/admin/manage-faq/manage-faq.module').then(m => m.ManageFaqModule)
+      },
+      {
+        path: 'manageSla', loadChildren: () => import('src/app/features/admin/manage-sla/sla.module').then(m => m.SlaModule)
       }
     ]
   }
