@@ -19,74 +19,74 @@ export class UserTypeAddEditComponent implements OnInit {
   submitted = false;
 
   constructor(
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
-      private userTypeService: UserTypeService,
-      private alertService: AlertService
-  ) {} 
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private userTypeService: UserTypeService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit() {
-      this.id = this.route.snapshot.params['id'];
-      this.isAddMode = !this.id;
-    
-      this.form = this.formBuilder.group({
-          role: ['', Validators.required],
-      });
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
 
-      if (!this.isAddMode) {
-          this.userTypeService.getById(this.id!)
-              .pipe(first())
-              .subscribe(x => this.form?.patchValue(x));
-      }
+    this.form = this.formBuilder.group({
+      role: ['', Validators.required],
+    });
+
+    if (!this.isAddMode) {
+      this.userTypeService.getById(this.id!)
+        .pipe(first())
+        .subscribe(x => this.form?.patchValue(x));
+    }
   }
 
   get f() { return this.form?.controls; }
 
   onSubmit() {
-      this.submitted = true;
+    this.submitted = true;
 
-      this.alertService.clear();
+    this.alertService.clear();
 
-      if (this.form?.invalid) {
-          return;
-      }
+    if (this.form?.invalid) {
+      return;
+    }
 
-      this.loading = true;
-      if (this.isAddMode) {
-          this.createUserType();
-      } else {
-          this.updateUserType();
-      }
+    this.loading = true;
+    if (this.isAddMode) {
+      this.createUserType();
+    } else {
+      this.updateUserType();
+    }
   }
 
   private createUserType() {
-      this.userTypeService.register(this.form?.value)
-          .pipe(first())
-          .subscribe({
-              next: () => {
-                  this.alertService.success('UserType added successfully', { keepAfterRouteChange: true });
-                  this.router.navigate(['../'], { relativeTo: this.route });
-              },
-              error: error => {
-                  this.alertService.error(error);
-                  this.loading = false;
-              }
-          });
+    this.userTypeService.register(this.form?.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('UserType added successfully', { keepAfterRouteChange: true });
+          this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
   }
 
   private updateUserType() {
-      this.userTypeService.update(this.id!, this.form?.value)
-          .pipe(first())
-          .subscribe({
-              next: () => {
-                  this.alertService.success('Update successful', { keepAfterRouteChange: true });
-                  this.router.navigate(['../../'], { relativeTo: this.route });
-              },
-              error: error => {
-                  this.alertService.error(error);
-                  this.loading = false;
-              }
-          });
+    this.userTypeService.update(this.id!, this.form?.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Update successful', { keepAfterRouteChange: true });
+          this.router.navigate(['../../'], { relativeTo: this.route });
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
   }
 }

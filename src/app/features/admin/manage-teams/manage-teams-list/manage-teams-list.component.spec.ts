@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ManageTeamsListComponent } from './manage-teams-list.component';
 
 describe('ManageTeamsListComponent', () => {

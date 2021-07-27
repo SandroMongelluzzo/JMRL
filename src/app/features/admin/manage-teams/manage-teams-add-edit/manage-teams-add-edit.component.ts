@@ -89,5 +89,5 @@ export class ManageTeamsAddEditComponent implements OnInit {
           this.loading = false;
         }
       });
-  }  
+  }
 }

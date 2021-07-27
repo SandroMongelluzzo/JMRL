@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SlaAddEditComponent } from './sla-add-edit.component';
 
 describe('SlaAddEditComponent', () => {

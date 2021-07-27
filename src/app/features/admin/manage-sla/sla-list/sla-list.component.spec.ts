@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SlaListComponent } from './sla-list.component';
 
 describe('SlaListComponent', () => {

@@ -11,21 +11,21 @@ import { UserTypeService } from 'src/app/core/services/user-type.service';
 })
 export class UserTypeListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'role', 'options'];
-  roles=null as any
+  roles = null as any
   dataSource = null as any;
-  
+
   constructor(
-    private userTypeService: UserTypeService,    
+    private userTypeService: UserTypeService,
     private alertService: AlertService) { }
 
   ngOnInit(): void {
 
     this.userTypeService.getAll()
       .pipe(first())
-      .subscribe(role =>        { 
+      .subscribe(role => {
         this.roles = role
-        this.dataSource =  new MatTableDataSource(this.roles)
-        });
+        this.dataSource = new MatTableDataSource(this.roles)
+      });
   }
 
   deleteUserType(id: number) {
@@ -41,7 +41,7 @@ export class UserTypeListComponent implements OnInit {
   private deleteRowDataTable() {
     this.dataSource = null;
     this.roles = [];
-    setTimeout(() => {      
+    setTimeout(() => {
       this.ngOnInit();
     }, 500);
   }

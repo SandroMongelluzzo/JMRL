@@ -11,21 +11,21 @@ import { TeamService } from 'src/app/core/services/team.service';
 })
 export class ManageTeamsListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'options'];
-  names=null as any
+  names = null as any
   dataSource = null as any;
-  
+
   constructor(
-    private teamService: TeamService,    
+    private teamService: TeamService,
     private alertService: AlertService) { }
 
   ngOnInit(): void {
 
     this.teamService.getAll()
       .pipe(first())
-      .subscribe(role =>        { 
+      .subscribe(role => {
         this.names = role
-        this.dataSource =  new MatTableDataSource(this.names)
-        });
+        this.dataSource = new MatTableDataSource(this.names)
+      });
   }
 
   deleteTeam(id: number) {
@@ -41,7 +41,7 @@ export class ManageTeamsListComponent implements OnInit {
   private deleteRowDataTable() {
     this.dataSource = null;
     this.names = [];
-    setTimeout(() => {      
+    setTimeout(() => {
       this.ngOnInit();
     }, 500);
   }

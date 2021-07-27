@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UserTypeService {  
+export class UserTypeService {
   private user_TypeSubject: BehaviorSubject<User_Type>;
   public user_TypeMain: Observable<User_Type>;
   data?: User_Type;

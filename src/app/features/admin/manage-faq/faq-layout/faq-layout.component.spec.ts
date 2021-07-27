@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FaqLayoutComponent } from './faq-layout.component';
 
 describe('FaqLayoutComponent', () => {

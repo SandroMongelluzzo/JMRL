@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FaqAddEditComponent } from './faq-add-edit.component';
 
 describe('FaqAddEditComponent', () => {

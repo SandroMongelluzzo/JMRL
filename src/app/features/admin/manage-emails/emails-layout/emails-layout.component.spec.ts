@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EmailsLayoutComponent } from './emails-layout.component';
 
 describe('EmailsLayoutComponent', () => {
