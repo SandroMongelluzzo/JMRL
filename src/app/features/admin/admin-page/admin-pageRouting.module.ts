@@ -17,7 +17,10 @@ const routes: Routes = [
       },
       {
         path: 'manageSla', loadChildren: () => import('src/app/features/admin/manage-sla/sla.module').then(m => m.SlaModule)
-      }
+      },
+      {
+        path: 'manageUserTypes', loadChildren: () => import('src/app/features/admin/manage-userType/user-type.module').then(m => m.UserTypeModule)
+      },
     ]
   }
 ]
