@@ -10,7 +10,7 @@ export interface Ticket{
     createdAt: Date,
     updatedAt: Date
 }
-
+// //Ticket2.0
 export interface Ticket2{
     id: number,
     issue: string,
@@ -20,3 +20,4 @@ export interface Ticket2{
     createdAt: Date,
     updatedAt: Date
 }
+//

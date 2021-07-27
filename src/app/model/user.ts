@@ -8,3 +8,14 @@ export interface User {
     token: string;
     admin:boolean;
 }
+/*/ //User 2.0
+export interface User {
+    id: number;
+    username: string;
+    emailAddress: string;
+    firstName: string;
+    lastName: string;
+    password: string;
+    token: string;
+}
+/*/
