@@ -21,6 +21,9 @@ const routes: Routes = [
       {
         path: 'manageUserTypes', loadChildren: () => import('src/app/features/admin/manage-userType/user-type.module').then(m => m.UserTypeModule)
       },
+      {
+        path: 'teams', loadChildren: () => import('src/app/features/admin/manage-teams/manage-teams.module').then(m => m.ManageTeamsModule)
+      },
     ]
   }
 ]
