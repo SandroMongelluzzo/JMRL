@@ -1,4 +1,4 @@
-.buttons{
-    display: inline;
+.buttons {
+    display: inline-flex;
     padding: 1%;
 }
