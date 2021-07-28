@@ -17,22 +17,24 @@ import { User } from 'src/app/model/user';
   styleUrls: ['./new-ticket-by-user.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
 export class NewTicketByUserComponent implements OnInit {
 
+  //abilitare this.createTicket() dentro OnSubmit
+
   issue = new FormControl('', [Validators.required]);
 
   form?: FormGroup;
   loading = false;
   submitted = false;
+  hidden = true;
   user?: User;
-  
-  //
+
   dataSource = null as any;
   columnsToDisplay = ['title'];
   faqs?: Faq[];
@@ -45,8 +47,6 @@ export class NewTicketByUserComponent implements OnInit {
     private ticketService: TicketService,
     private alertService: AlertService,
     private accountSerivce: AccountService,
-
-    //
     private faqService: FaqService,
   ) { }
 
@@ -60,14 +60,14 @@ export class NewTicketByUserComponent implements OnInit {
       priority: ['Low', Validators.required],
       //userId: [this.user.id, Validators.required],
       //attachment: ['', Validators.required],
-    });   
+    });
 
     this.faqService.getAll()
-    .pipe(first())
-    .subscribe(faq => {
-      this.faqs = faq;
-      this.dataSource = new MatTableDataSource(this.faqs);
-    });
+      .pipe(first())
+      .subscribe(faq => {
+        this.faqs = faq;
+        this.dataSource = new MatTableDataSource(this.faqs);
+      });
   }
 
   get f() { return this.form?.controls; }
@@ -81,7 +81,7 @@ export class NewTicketByUserComponent implements OnInit {
       return;
     }
     this.loading = true;
-     // this.createTicket();
+    // this.createTicket(); //disabilitato per testing, da abilitare
   }
 
   private createTicket() {
@@ -108,8 +108,8 @@ export class NewTicketByUserComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    this.hidden = (filterValue=='')
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource)
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
