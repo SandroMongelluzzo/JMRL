@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { CommonModule } from '@angular/common';
 import { UserAddEditComponent } from './user-add-edit/user-add-edit.component';

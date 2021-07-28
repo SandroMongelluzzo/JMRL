@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { NewTicketComponent } from './new-ticket.component';
 
 describe('NewTicketComponent', () => {

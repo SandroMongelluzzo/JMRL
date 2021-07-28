@@ -5,8 +5,6 @@ import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account-service.service';
 import { AlertService } from 'src/app/core/services/alert-service.service';
 
-
-
 @Component({ templateUrl: 'user-add-edit.component.html' })
 export class UserAddEditComponent implements OnInit {
     form?: FormGroup;
